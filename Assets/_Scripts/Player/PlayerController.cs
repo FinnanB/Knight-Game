@@ -235,7 +235,6 @@ public class PlayerController : MonoBehaviour
                 hImage[i].color = c2;
             }
         }
-
     }
 
     void _Health()
@@ -301,6 +300,7 @@ public class PlayerController : MonoBehaviour
         
         if (Physics.SphereCast(transform.position, sphereRad, transform.forward, out hit, maxDis, layerMask, QueryTriggerInteraction.Ignore))
         {
+            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left) * hit.distance, Color.yellow);
             currentHitObject = hit.transform.gameObject;
             if (currentHitObject.CompareTag("Enemy"))
             {
@@ -377,7 +377,4 @@ public class PlayerController : MonoBehaviour
             speed = 6;
         }
     }
-
-    
-
 }

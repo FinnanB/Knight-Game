@@ -17,10 +17,14 @@ public class Sword : MonoBehaviour
             Debug.Log("h");
             c_Animator.SetTrigger("Swing");
         }
-        if (Input.GetMouseButtonDown(1) && GetComponent<PlayerController>().mana >=5 && swing)
+        if(Input.GetKeyDown("r"))
+        {
+            c_Animator.SetTrigger("Switch");
+        }
+        /*if (Input.GetMouseButtonDown(1) && GetComponent<PlayerController>().mana >=5 && swing)
         {
             c_Animator.SetTrigger("Overhead");
             GetComponent<PlayerController>().mana -= 5;
-        }
+        }*/
     }
 }
