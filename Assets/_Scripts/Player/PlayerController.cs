@@ -65,6 +65,9 @@ public class PlayerController : MonoBehaviour
     public int heals;
     public TMP_Text exp;
 
+    public float stamRegen;
+    public bool staminaRegening;
+
     public float _block;
 
     public float maxSturdy;
@@ -192,8 +195,11 @@ public class PlayerController : MonoBehaviour
         LockOn();
         _Health();
         _UI();
-
-        if(Input.GetKeyDown(KeyCode.LeftShift) && mana > 0)
+        if (staminaRegening)
+        {
+            _Stamima();
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift) && mana > 0)
         {
             StopCoroutine(Shield());
             StartCoroutine(Shield());
@@ -204,7 +210,25 @@ public class PlayerController : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+        }
+    }
+
+    void _Stamima()
+    {
+        if (stamina < 0)
+        {
+            stamina = 0;
+            stamRegen = 0.05f;
+        }
+        else if (stamina < playerData.maxStam)
+        {
+            stamina += stamRegen;
+        }
+        else if (stamina >= playerData.maxStam)
+        {
+            stamina = playerData.maxStam;
+            stamRegen = 0.1f;
         }
     }
 
@@ -217,8 +241,15 @@ public class PlayerController : MonoBehaviour
         healthSize = (healthSizeMax * healthPerc) +5;
         h_RectTransform.offsetMax = new Vector2(-healthSize, -h_RectTransform.offsetMin.y);
 
+        stamSizeMax = playerData.maxStam * 20;
+        m_RectTransform3.sizeDelta = new Vector2(stamSizeMax, m_RectTransform3.sizeDelta.y);
+
+        float stamPerc = (playerData.maxStam - stamina) / playerData.maxStam;
+        stamSize = (stamSizeMax * stamPerc) + 5;
+        h_RectTransform3.offsetMax = new Vector2(-stamSize, -h_RectTransform3.offsetMin.y);
+
         manaSizeMax = playerData.maxMana * 20;
-        m_RectTransform2.sizeDelta = new Vector2(manaSizeMax, m_RectTransform.sizeDelta.y);
+        m_RectTransform2.sizeDelta = new Vector2(manaSizeMax, m_RectTransform2.sizeDelta.y);
         float manaPerc = (playerData.maxMana -mana)/ playerData.maxMana;
         manaSize = (manaSizeMax * manaPerc) + 5;
         h_RectTransform2.offsetMax = new Vector2(-manaSize, -h_RectTransform2.offsetMin.y);
@@ -260,13 +291,13 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
         transform.rotation = Quaternion.Euler(0f, cam.eulerAngles.y, 0f);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+       /* if (Input.GetKeyDown(KeyCode.Space))
         {
             c_Animator.SetFloat("Forward", horizontal);
             c_Animator.SetFloat("Sides", vertical);
             c_Animator.SetTrigger("Dodge");
             //dodge = true;
-        }
+        }*/
         if (direction.magnitude >= 0.1f)
         {
             

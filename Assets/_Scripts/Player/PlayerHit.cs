@@ -8,16 +8,17 @@ public class PlayerHit : MonoBehaviour
 
     public GameObject _Player;
 
+
     void Start()
     {
         _Player = GameObject.FindWithTag("Player");
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("hit");
+        
         if (other.tag == "Enemy")
         {
+            Debug.Log(other.gameObject);
             other.GetComponent<EnemyController>().Hit(damage);
             _Player.GetComponent<PlayerController>().mana++;
         }
