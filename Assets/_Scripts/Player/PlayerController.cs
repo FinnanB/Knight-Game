@@ -289,6 +289,10 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+        c_Animator.SetFloat("Sides", Mathf.Clamp(horizontal * speed, -1f, 1f));
+        c_Animator.SetFloat("Forward", Mathf.Clamp(vertical *speed, -1f, 1f));
+
         transform.rotation = Quaternion.Euler(0f, cam.eulerAngles.y, 0f);
 
        /* if (Input.GetKeyDown(KeyCode.Space))
@@ -305,7 +309,7 @@ public class PlayerController : MonoBehaviour
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            controller.Move(moveDir.normalized * (speed + direction.z) * Time.deltaTime);
         }
     }
 

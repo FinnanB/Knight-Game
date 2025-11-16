@@ -1,0 +1,169 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Running
+  m_Mask: 01000000010000000100000001000000010000000000000000000000000000000000000001000000010000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 1
+  - m_Path: Armature/ArmIKL
+    m_Weight: 0
+  - m_Path: Armature/ArmIKL/ArmIKL_end
+    m_Weight: 0
+  - m_Path: Armature/ArmIKR.
+    m_Weight: 0
+  - m_Path: Armature/ArmIKR./ArmIKR._end
+    m_Weight: 0
+  - m_Path: Armature/Center
+    m_Weight: 1
+  - m_Path: Armature/Center/HipL
+    m_Weight: 1
+  - m_Path: Armature/Center/HipL/HipR
+    m_Weight: 1
+  - m_Path: Armature/Center/HipL/HipR/HipR_end
+    m_Weight: 1
+  - m_Path: Armature/Center/UpperBack
+    m_Weight: 1
+  - m_Path: Armature/Center/UpperBack/Neck
+    m_Weight: 1
+  - m_Path: Armature/Center/UpperBack/Neck/Head
+    m_Weight: 1
+  - m_Path: Armature/Center/UpperBack/Neck/Head/Head_end
+    m_Weight: 1
+  - m_Path: Armature/Center/UpperBack/ShoulderL
+    m_Weight: 1
+  - m_Path: Armature/Center/UpperBack/ShoulderL/ShoulderL_end
+    m_Weight: 1
+  - m_Path: Armature/Center/UpperBack/SHoulderR
+    m_Weight: 1
+  - m_Path: Armature/Center/UpperBack/SHoulderR/SHoulderR_end
+    m_Weight: 1
+  - m_Path: Armature/Center/UpperBack/UpArmL
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmL/LowArmL
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmL/LowArmL/HandL
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmL/LowArmL/HandL/HandL_end
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmL/LowArmL/LowArmL.001
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmL/LowArmL/LowArmL.001/LowArmL.001_end
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmL/LowArmL/LowArmL.001/MedSword.001
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmR.
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmR./LowArmR.
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmR./LowArmR./HandR.
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmR./LowArmR./HandR./HandR._end
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmR./LowArmR./LowArmR..001
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmR./LowArmR./LowArmR..001/BladeBottom
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmR./LowArmR./LowArmR..001/BladeBottom/BladeBottom_end
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmR./LowArmR./LowArmR..001/BladeUp
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmR./LowArmR./LowArmR..001/BladeUp/Blade
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmR./LowArmR./LowArmR..001/BladeUp/Blade/Blade.001
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmR./LowArmR./LowArmR..001/BladeUp/Blade/Blade_end
+    m_Weight: 0
+  - m_Path: Armature/Center/UpperBack/UpArmR./LowArmR./LowArmR..001/Handle
+    m_Weight: 0
+  - m_Path: Armature/ElbowL
+    m_Weight: 0
+  - m_Path: Armature/ElbowL/ElbowL_end
+    m_Weight: 0
+  - m_Path: Armature/ElbowR
+    m_Weight: 0
+  - m_Path: Armature/ElbowR/ElbowR_end
+    m_Weight: 0
+  - m_Path: Armature/KneeL
+    m_Weight: 1
+  - m_Path: Armature/KneeL/KneeL_end
+    m_Weight: 1
+  - m_Path: Armature/KneeR.
+    m_Weight: 1
+  - m_Path: Armature/KneeR./KneeR._end
+    m_Weight: 1
+  - m_Path: Armature/LegIKL
+    m_Weight: 1
+  - m_Path: Armature/LegIKL/FootL
+    m_Weight: 1
+  - m_Path: Armature/LegIKL/FootL/FootL_end
+    m_Weight: 1
+  - m_Path: Armature/LegIKR.
+    m_Weight: 1
+  - m_Path: Armature/LegIKR./FootR.
+    m_Weight: 1
+  - m_Path: Armature/LegIKR./FootR./FootR._end
+    m_Weight: 1
+  - m_Path: Armature/UpLegL
+    m_Weight: 1
+  - m_Path: Armature/UpLegL/LowLegL
+    m_Weight: 1
+  - m_Path: Armature/UpLegL/LowLegL/LowLegL_end
+    m_Weight: 1
+  - m_Path: Armature/UpLegR.
+    m_Weight: 1
+  - m_Path: Armature/UpLegR./LowLegR.
+    m_Weight: 1
+  - m_Path: Armature/UpLegR./LowLegR./LowLegR._end
+    m_Weight: 1
+  - m_Path: Body
+    m_Weight: 1
+  - m_Path: Chain
+    m_Weight: 1
+  - m_Path: Chest
+    m_Weight: 1
+  - m_Path: Cube
+    m_Weight: 1
+  - m_Path: Cylinder
+    m_Weight: 1
+  - m_Path: Elbow
+    m_Weight: 1
+  - m_Path: Elbow.001
+    m_Weight: 1
+  - m_Path: Foot
+    m_Weight: 1
+  - m_Path: Foot.001
+    m_Weight: 1
+  - m_Path: Hand
+    m_Weight: 1
+  - m_Path: Hand.002
+    m_Weight: 1
+  - m_Path: Helmet.001
+    m_Weight: 1
+  - m_Path: Knee
+    m_Weight: 1
+  - m_Path: LowArm
+    m_Weight: 1
+  - m_Path: LowLeg
+    m_Weight: 1
+  - m_Path: LowLeg.001
+    m_Weight: 1
+  - m_Path: Shoulder
+    m_Weight: 1
+  - m_Path: Shoulder.002
+    m_Weight: 1
+  - m_Path: UpArm
+    m_Weight: 1
+  - m_Path: UpArm.002
+    m_Weight: 1
+  - m_Path: UpLeg
+    m_Weight: 1
+  - m_Path: UpLeg.001
+    m_Weight: 1
