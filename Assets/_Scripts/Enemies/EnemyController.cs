@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour
     {
         if (sturdy <= 0)
         {
-            c_Animator.SetTrigger("Fall");
+            //c_Animator.SetTrigger("Fall");
             sturdy = maxSturdy;
         }
         if (health <= 0)
@@ -72,19 +72,19 @@ public class EnemyController : MonoBehaviour
         startPos = transform.position;
         startEulerAngles = transform.eulerAngles;
         seen = false;
-        //navAgent = GetComponent<NavMeshAgent>();
+        navAgent = GetComponent<NavMeshAgent>();
         sturdy = maxSturdy;
         destination = transform.position;
         targetObject = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    /*void canSee()
+    void canSee()
     {
         RaycastHit hit;
         if (Physics.Raycast(eyes.position, transform.TransformDirection(Vector3.forward), out hit, 100, ~layerMask, QueryTriggerInteraction.Ignore))
         {
             Debug.DrawRay(eyes.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-           // Debug.Log(hit.transform.gameObject.layer);
+            Debug.Log(hit.transform.gameObject.layer);
             isPlayerVisible(hit.distance);
         }
         else
@@ -106,7 +106,7 @@ public class EnemyController : MonoBehaviour
             isVisible = false;
         }
 
-    }*/
+    }
 
     // Update is called once per frame
     void Update()
@@ -128,7 +128,7 @@ public class EnemyController : MonoBehaviour
         else if(!isClose)
         {
             seen = false;
-            //destination = transform.position;
+            destination = transform.position;
         }
         if(seen)
         {
@@ -138,12 +138,12 @@ public class EnemyController : MonoBehaviour
         {
             destination = transform.position;
         }
-        //canSee();
+        canSee();
         Sturdy();
         if(health <= 0)
         {
             gameObject.SetActive(false);
         }
-        //navAgent.SetDestination(destination);
+        navAgent.SetDestination(destination);
     }
 }

@@ -152,9 +152,10 @@ public class PlayerController : MonoBehaviour
 
     public void LevelUp()
     {
-        if(playerData.exp >= 10)
+        if(playerData.exp >= (10*Mathf.Pow(1.5f, playerData.level)))
         {
             playerData.level++;
+            Debug.Log(10 + (Mathf.Pow(1.1f, playerData.level)));
             playerData.maxHealth += playerData.maxHealth * 0.2f;
             playerData.damage += playerData.damage * 0.5f;
             playerData.exp -= 10;
@@ -210,7 +211,7 @@ public class PlayerController : MonoBehaviour
 
         if (health <= 0)
         {
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -219,7 +220,7 @@ public class PlayerController : MonoBehaviour
         if (stamina < 0)
         {
             stamina = 0;
-            stamRegen = 0.05f;
+            stamRegen = 0.01f;
         }
         else if (stamina < playerData.maxStam)
         {
@@ -228,7 +229,7 @@ public class PlayerController : MonoBehaviour
         else if (stamina >= playerData.maxStam)
         {
             stamina = playerData.maxStam;
-            stamRegen = 0.1f;
+            stamRegen = 0.02f;
         }
     }
 
@@ -384,6 +385,9 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator _Fall()
     {
+        GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(0.01f);
+        GetComponent<Collider>().enabled = true;
         yield return new WaitForSeconds(10f);
         sturdy = maxSturdy;
     }

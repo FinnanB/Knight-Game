@@ -18,7 +18,7 @@ public class PlayerHit : MonoBehaviour
         
         if (other.tag == "Enemy")
         {
-            Debug.Log(other.gameObject);
+           // Debug.Log(other.gameObject);
             other.GetComponent<EnemyController>().Hit(damage);
             _Player.GetComponent<PlayerController>().mana++;
         }
