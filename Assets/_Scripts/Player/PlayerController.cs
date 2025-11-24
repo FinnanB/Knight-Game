@@ -18,6 +18,7 @@ public struct PlayerStatus
     public int level;
     public int exp;
     public int weapon;
+    public Vector3 spawnPoint;
 }
 
 public class PlayerController : MonoBehaviour
@@ -78,6 +79,8 @@ public class PlayerController : MonoBehaviour
     public MeshRenderer _meshRenderer;
     MaterialPropertyBlock propertyBlock;
 
+    public Transform spawnPoint;
+
     string filePath;
     const string FILE_NAME = "SaveStatus.json";
 
@@ -100,11 +103,21 @@ public class PlayerController : MonoBehaviour
         
         filePath = Application.persistentDataPath;
         playerData = new PlayerStatus();
-       // ResetData();
+        // ResetData();
+        
         LoadData();
+        //playerData.spawnPoint = spawnPoint;
         propertyBlock = new MaterialPropertyBlock();
         sturdy = maxSturdy;
         Reset();
+    }
+
+    public void SetPosition()
+    {
+
+        playerData.spawnPoint = transform.position;
+        SaveData();
+        //Debug.Log(playerData.spawnPoint);
     }
 
     public void LoadData()
@@ -124,10 +137,10 @@ public class PlayerController : MonoBehaviour
     public void ResetData()
     {
         playerData.maxHeals = 3;
-        playerData.maxMana = 10;
-        playerData.maxHealth = 10;
-        playerData.maxStam = 10;
-        playerData.damage = 5;
+        playerData.maxMana = 150;
+        playerData.maxHealth = 200;
+        playerData.maxStam = 200;
+        playerData.damage = 25;
         playerData.weapon = 0;
         playerData.level = 0;
         playerData.exp = 0;
@@ -148,6 +161,7 @@ public class PlayerController : MonoBehaviour
         stamina = playerData.maxStam;
         mana = playerData.maxMana;
         heals = playerData.maxHeals;
+        transform.position = playerData.spawnPoint;
     }
 
     public void LevelUp()
@@ -169,7 +183,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         if (heals > 0)
         {
-            health += 3;
+            health += 30;
             
             heals--;
         }
@@ -206,11 +220,13 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Shield());
         }
 
-        propertyBlock.SetFloat("_Alpha", _block);
-        _meshRenderer.SetPropertyBlock(propertyBlock);
+        //propertyBlock.SetFloat("_Alpha", _block);
+        //_meshRenderer.SetPropertyBlock(propertyBlock);
 
         if (health <= 0)
         {
+            playerData.exp = 0;
+            SaveData();
             Destroy(gameObject);
         }
     }
@@ -220,7 +236,7 @@ public class PlayerController : MonoBehaviour
         if (stamina < 0)
         {
             stamina = 0;
-            stamRegen = 0.01f;
+            stamRegen = 1f;
         }
         else if (stamina < playerData.maxStam)
         {
@@ -229,27 +245,27 @@ public class PlayerController : MonoBehaviour
         else if (stamina >= playerData.maxStam)
         {
             stamina = playerData.maxStam;
-            stamRegen = 0.02f;
+            stamRegen = 2f;
         }
     }
 
     void _UI()
     {
-        healthSizeMax = playerData.maxHealth *20;
+        healthSizeMax = playerData.maxHealth;
         m_RectTransform.sizeDelta = new Vector2(healthSizeMax, m_RectTransform.sizeDelta.y);
         
         float healthPerc = (playerData.maxHealth -health) / playerData.maxHealth;
         healthSize = (healthSizeMax * healthPerc) +5;
         h_RectTransform.offsetMax = new Vector2(-healthSize, -h_RectTransform.offsetMin.y);
 
-        stamSizeMax = playerData.maxStam * 20;
+        stamSizeMax = playerData.maxStam;
         m_RectTransform3.sizeDelta = new Vector2(stamSizeMax, m_RectTransform3.sizeDelta.y);
 
         float stamPerc = (playerData.maxStam - stamina) / playerData.maxStam;
         stamSize = (stamSizeMax * stamPerc) + 5;
         h_RectTransform3.offsetMax = new Vector2(-stamSize, -h_RectTransform3.offsetMin.y);
 
-        manaSizeMax = playerData.maxMana * 20;
+        manaSizeMax = playerData.maxMana;
         m_RectTransform2.sizeDelta = new Vector2(manaSizeMax, m_RectTransform2.sizeDelta.y);
         float manaPerc = (playerData.maxMana -mana)/ playerData.maxMana;
         manaSize = (manaSizeMax * manaPerc) + 5;
@@ -305,12 +321,16 @@ public class PlayerController : MonoBehaviour
         }*/
         if (direction.magnitude >= 0.1f)
         {
-            
+            staminaRegening = false;
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * (speed + direction.z) * Time.deltaTime);
+        }
+        else
+        {
+            staminaRegening = true;
         }
     }
 

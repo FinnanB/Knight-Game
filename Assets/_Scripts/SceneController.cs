@@ -49,8 +49,9 @@ public class SceneController : MonoBehaviour
             enemy.SetActive(true);
             enemy.GetComponent<EnemyController>().Reset();
         }
+        player.GetComponent<PlayerController>().SetPosition();
         player.GetComponent<PlayerController>().Reset();
-        player.GetComponent<Bow>().arrows = player.GetComponent<Bow>().maxArrows;
+       // player.GetComponent<Bow>().arrows = player.GetComponent<Bow>().maxArrows;
     }
 
     public void UnPause()

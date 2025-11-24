@@ -43,7 +43,7 @@ public class EnemyController : MonoBehaviour
         transform.position = startPos;
         transform.eulerAngles = startEulerAngles;
         seen = false;
-        Debug.Log(seen);
+       // Debug.Log(seen);
         destination = transform.position;
     }
 
@@ -84,7 +84,7 @@ public class EnemyController : MonoBehaviour
         if (Physics.Raycast(eyes.position, transform.TransformDirection(Vector3.forward), out hit, 100, ~layerMask, QueryTriggerInteraction.Ignore))
         {
             Debug.DrawRay(eyes.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            Debug.Log(hit.transform.gameObject.layer);
+            //Debug.Log(hit.transform.gameObject.layer);
             isPlayerVisible(hit.distance);
         }
         else

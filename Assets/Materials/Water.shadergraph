@@ -201,6 +201,7 @@
     "m_OutputNode": {
         "m_Id": ""
     },
+    "m_SubDatas": [],
     "m_ActiveTargets": [
         {
             "m_Id": "cf178d9ab3e44e82bf1e71f5944fd4b0"
@@ -389,10 +390,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1203.0,
-            "y": 318.0,
-            "width": 124.0,
-            "height": 173.0
+            "x": -1097.9998779296875,
+            "y": 463.9999694824219,
+            "width": 123.99993896484375,
+            "height": 173.00003051757813
         }
     },
     "m_Slots": [
@@ -1026,7 +1027,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "CellDensity",
     "m_StageCapability": 3,
-    "m_Value": 2.0,
+    "m_Value": 100.0,
     "m_DefaultValue": 5.0,
     "m_Labels": []
 }
@@ -1167,6 +1168,7 @@
     "m_SGVersion": 2,
     "m_Type": "UnityEditor.Rendering.BuiltIn.ShaderGraph.BuiltInTarget",
     "m_ObjectId": "cf178d9ab3e44e82bf1e71f5944fd4b0",
+    "m_Datas": [],
     "m_ActiveSubTarget": {
         "m_Id": "017c4def011c47288cfb6d2d56d80020"
     },
@@ -1215,9 +1217,9 @@
     },
     "m_Color": {
         "color": {
-            "r": 0.6078431606292725,
-            "g": 1.0,
-            "b": 0.8330247402191162,
+            "r": 0.17866677045822144,
+            "g": 0.3323959708213806,
+            "b": 0.5188679099082947,
             "a": 0.0
         },
         "mode": 0
@@ -1283,9 +1285,9 @@
     },
     "m_Color": {
         "color": {
-            "r": 0.0,
-            "g": 0.5647059082984924,
-            "b": 0.45491883158683779,
+            "r": 0.3517710864543915,
+            "g": 0.3636161684989929,
+            "b": 0.801886796951294,
             "a": 0.0
         },
         "mode": 0
