@@ -13,11 +13,19 @@ public class SceneController : MonoBehaviour
     public GameObject[] enemies;
     GameObject arrows;
     public GameObject player;
+
+    public bool reset;
     // Start is called before the first frame update
     void Start()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         player = GameObject.FindWithTag("Player");
+        /*if(reset)
+        {
+            reset = false;
+            player.GetComponent<PlayerController>().ResetData();
+            player.GetComponent<Sword>().ResetData();
+        }*/
         inRange = false;
     }
 
@@ -41,7 +49,8 @@ public class SceneController : MonoBehaviour
 
     public void Pause()
     {
-       // mInput.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        // mInput.SetActive(false);
         pause.SetActive(true);
         Time.timeScale = 0;
         foreach(GameObject enemy in enemies)
@@ -56,6 +65,7 @@ public class SceneController : MonoBehaviour
 
     public void UnPause()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
         pause.SetActive(false);
        // mInput.SetActive(true);

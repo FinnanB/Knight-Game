@@ -55,7 +55,7 @@ public class Chain : MonoBehaviour
             hit.enabled = true;
             Vector3 newPos = chain[chain.Count/2].transform.position;
             hitBox.transform.position = newPos;
-            hit.height = chain.Count * 0.15f;
+            hit.height = chain.Count * 0.17f;
         }
         else if(chain.Count == 0)
         {

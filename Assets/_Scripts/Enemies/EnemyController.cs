@@ -26,11 +26,13 @@ public class EnemyController : MonoBehaviour
 
     public int xp;
 
-    Vector3 startPos;
+    public Vector3 startPos;
     Vector3 startEulerAngles;
 
-    public void Hit(float dam)
+    public void Hit(float dam, GameObject other)
     {
+        targetObject = other.transform;
+        seen = true;
         StopCoroutine(_Fall());
         health -= dam;
         sturdy--;

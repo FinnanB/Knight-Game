@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHit : MonoBehaviour
 {
     public float damage;
+    public float _D;
 
     public GameObject enemy;
 
@@ -18,6 +19,7 @@ public class EnemyHit : MonoBehaviour
         if (other.tag == "Player")
         {
             other.GetComponent<PlayerController>().Hit(damage);
+            GetComponent<Collider>().enabled = false;
             if(other.GetComponent<PlayerController>()._block == 0)
             {
                 enemy.GetComponent<EnemyController>().sturdy = 0;

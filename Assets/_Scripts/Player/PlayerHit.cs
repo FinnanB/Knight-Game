@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerHit : MonoBehaviour
 {
     public float damage;
+    float trueDamage;
 
     public GameObject _Player;
 
@@ -15,16 +16,17 @@ public class PlayerHit : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        
+        trueDamage = damage * _Player.GetComponent<PlayerController>().playerData.damage;
+        Debug.Log(trueDamage);
         if (other.tag == "Enemy")
         {
            // Debug.Log(other.gameObject);
-            other.GetComponent<EnemyController>().Hit(damage);
-            _Player.GetComponent<PlayerController>().mana++;
+            other.GetComponent<EnemyController>().Hit(trueDamage, _Player);
+            _Player.GetComponent<PlayerController>().mana +=10;
         }
         if (other.tag == "Boss")
         {
-            other.GetComponent<SnakeController>().Hit(damage);
+            other.GetComponent<SnakeController>().Hit(trueDamage);
             _Player.GetComponent<PlayerController>().mana++;
         }
     }

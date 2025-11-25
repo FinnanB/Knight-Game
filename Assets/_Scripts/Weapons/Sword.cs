@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.IO;
+using TMPro;
 
 public struct SwordStatus
 {
@@ -33,6 +34,7 @@ public class Sword : MonoBehaviour
     public int lvl;
 
     public bool run;
+    public TMP_Text moveCount;
 
     string filePath;
     const string FILE_NAME = "WeaponStatus.json";
@@ -49,6 +51,12 @@ public class Sword : MonoBehaviour
         {
             sInstance = this;
         }
+    }
+
+    public void LevelUp()
+    {
+        swordData.level = 2;
+        SaveData();
     }
 
 
@@ -122,6 +130,8 @@ public class Sword : MonoBehaviour
 
     void Update()
     {
+        totalMoves = swordData.level;
+        moveCount.text = "Attacks: " + currentMoves + "/" + totalMoves;
         if (run)
         {
             SetData();
@@ -167,6 +177,12 @@ public class Sword : MonoBehaviour
             }
             c_Animator.SetBool(_Attacks[i], _Tog[i].isOn);
         }
+        
+    }
+
+    void UIManger()
+    {
+        
     }
 
     void ResetAnim()

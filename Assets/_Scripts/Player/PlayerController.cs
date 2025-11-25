@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
         filePath = Application.persistentDataPath;
         playerData = new PlayerStatus();
         // ResetData();
@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
         playerData.maxMana = 150;
         playerData.maxHealth = 200;
         playerData.maxStam = 200;
-        playerData.damage = 25;
+        playerData.damage = 5;
         playerData.weapon = 0;
         playerData.level = 0;
         playerData.exp = 0;
@@ -206,19 +206,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //speed = 12;
         Move();
         LockOn();
         _Health();
+        Sprint();
         _UI();
         if (staminaRegening)
         {
             _Stamima();
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && mana > 0)
+        /*if (Input.GetKeyDown(KeyCode.LeftShift) && mana > 0)
         {
             StopCoroutine(Shield());
             StartCoroutine(Shield());
-        }
+        }*/
 
         //propertyBlock.SetFloat("_Alpha", _block);
         //_meshRenderer.SetPropertyBlock(propertyBlock);
@@ -427,12 +429,16 @@ public class PlayerController : MonoBehaviour
 
     void Sprint()
     {
-        if(Input.GetKey(KeyCode.LeftShift))
+        if(Input.GetKey(KeyCode.LeftShift) && stamina > 0)
         {
+            
+            stamina -= 30*Time.deltaTime;
+            staminaRegening = false;
             speed = 12;
         }
         else
         {
+            staminaRegening = true;
             speed = 6;
         }
     }
