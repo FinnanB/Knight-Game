@@ -79,10 +79,15 @@ public class PlayerController : MonoBehaviour
     public MeshRenderer _meshRenderer;
     MaterialPropertyBlock propertyBlock;
 
-    public Transform spawnPoint;
+    public Vector3 spawnPoint;
 
     string filePath;
     const string FILE_NAME = "SaveStatus.json";
+
+    public bool canMove;
+
+    public bool lockMouse;
+    public Collider hitZone;
 
     public static PlayerController Instance { get; private set; }
 
@@ -100,7 +105,11 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        if(lockMouse)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        
         filePath = Application.persistentDataPath;
         playerData = new PlayerStatus();
         // ResetData();
@@ -144,6 +153,8 @@ public class PlayerController : MonoBehaviour
         playerData.weapon = 0;
         playerData.level = 0;
         playerData.exp = 0;
+        transform.position = Vector3.zero;
+        playerData.spawnPoint = transform.position;
         SaveData();
     }
 
@@ -207,10 +218,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //speed = 12;
-        Move();
+        if (canMove)
+        {
+            Move();
+            Sprint();
+        }
+
+        
         LockOn();
         _Health();
-        Sprint();
+        
         _UI();
         if (staminaRegening)
         {
@@ -407,10 +424,11 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator _Fall()
     {
-        GetComponent<Collider>().enabled = false;
-        yield return new WaitForSeconds(0.01f);
-        GetComponent<Collider>().enabled = true;
-        yield return new WaitForSeconds(10f);
+        hitZone.enabled = false;
+
+        yield return new WaitForSeconds(0.75f);
+        hitZone.enabled = true;
+       // yield return new WaitForSeconds(1f);
         sturdy = maxSturdy;
     }
 

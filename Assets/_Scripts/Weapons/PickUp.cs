@@ -17,10 +17,18 @@ public class PickUp : MonoBehaviour
     public TMP_Text hint;
     public String hintText;
 
+    AudioSource m_MyAudioSource;
+
+    void Start()
+    {
+        m_MyAudioSource = GetComponent<AudioSource>();
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+            m_MyAudioSource.Play();
             if (!upgrade)
             {
                 other.GetComponent<Sword>()._Tog[attackNum].gameObject.SetActive(true);

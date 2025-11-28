@@ -31,6 +31,10 @@ public class Sword : MonoBehaviour
     public int currentMoves;
     public int totalMoves;
 
+    public Collider sw1;
+    public Collider sw2;
+    public Collider sw3;
+
     public int lvl;
 
     public bool run;
@@ -132,22 +136,19 @@ public class Sword : MonoBehaviour
     {
         totalMoves = swordData.level;
         moveCount.text = "Attacks: " + currentMoves + "/" + totalMoves;
-        if (run)
-        {
-            SetData();
-            //Debug.Log("h");
-            run = false;
-        }
+
         if (Input.GetMouseButtonDown(0) && GetComponent<PlayerController>().stamina >= swingCost)
         {
             GetComponent<PlayerController>().stamina -= swingCost;
             c_Animator.SetTrigger("Swing");
+            StartCoroutine(PlayAnimation());
         }
         if (Input.GetMouseButtonDown(1) && GetComponent<PlayerController>().stamina >= swingCost*2 && GetComponent<PlayerController>().mana >= swingCost * 2)
         {
             GetComponent<PlayerController>().stamina -= swingCost;
             GetComponent<PlayerController>().mana -= swingCost;
             c_Animator.SetTrigger("Heavy");
+            StartCoroutine(PlayAnimation());
         }
         if (Input.GetKeyDown("r"))
         {
@@ -189,6 +190,29 @@ public class Sword : MonoBehaviour
     {
         c_Animator.ResetTrigger("Swing");
         c_Animator.ResetTrigger("Heavy");
+    }
+
+    IEnumerator PlayAnimation()
+    {
+        AnimatorStateInfo stateInfo = c_Animator.GetCurrentAnimatorStateInfo(0);
+        int cur = stateInfo.shortNameHash;
+        
+        yield return new WaitUntil(() => c_Animator.GetCurrentAnimatorStateInfo(0).shortNameHash != cur);
+        stateInfo = c_Animator.GetCurrentAnimatorStateInfo(0);
+        c_Animator.SetFloat("Sides", 0);
+        c_Animator.SetFloat("Forward", 0);
+        GetComponent<PlayerController>().speed = 0;
+        GetComponent<PlayerController>().canMove = false;
+        sw1.enabled = true;
+        sw2.enabled = true;
+        sw3.enabled = true;
+        yield return new WaitForSeconds(stateInfo.length);
+        GetComponent<PlayerController>().speed = 6;
+        GetComponent<PlayerController>().canMove = true;
+        sw1.enabled = false;
+        sw2.enabled = false;
+        sw3.enabled = false;
+        yield return null;
     }
 
     IEnumerator Switch()

@@ -83,6 +83,7 @@ public class SceneController : MonoBehaviour
     public void LoadA(string scenename)
     {
         UnPause();
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(scenename);
     }
 

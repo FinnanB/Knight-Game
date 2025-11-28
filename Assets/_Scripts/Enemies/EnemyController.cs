@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
@@ -28,6 +29,8 @@ public class EnemyController : MonoBehaviour
 
     public Vector3 startPos;
     Vector3 startEulerAngles;
+
+
 
     public void Hit(float dam, GameObject other)
     {
