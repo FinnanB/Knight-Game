@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Cinemachine;
+//using Cinemachine;
 using System;
 using System.IO;
 using TMPro;
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
         
         filePath = Application.persistentDataPath;
         playerData = new PlayerStatus();
-        // ResetData();
+         ResetData();
         
         LoadData();
         //playerData.spawnPoint = spawnPoint;
@@ -225,7 +225,7 @@ public class PlayerController : MonoBehaviour
         }
 
         
-        LockOn();
+        //LockOn();
         _Health();
         
         _UI();
@@ -368,7 +368,7 @@ public class PlayerController : MonoBehaviour
         _block = 1;
     }
 
-    void LockOn()
+    /*void LockOn()
     {
         
         RaycastHit hit;
@@ -412,7 +412,7 @@ public class PlayerController : MonoBehaviour
                 enemy = null;
             }
         }
-    }
+    }*/
 
     public void Hit(float dam)
     {
