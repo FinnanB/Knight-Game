@@ -199,6 +199,7 @@
     "m_OutputNode": {
         "m_Id": ""
     },
+    "m_SubDatas": [],
     "m_ActiveTargets": [
         {
             "m_Id": "bedfde596aef4623a99d19b97aa820b3"
@@ -446,7 +447,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "AlphaClipThreshold",
     "m_StageCapability": 2,
-    "m_Value": 0.20000000298023225,
+    "m_Value": 0.0,
     "m_DefaultValue": 0.5,
     "m_Labels": []
 }
@@ -1255,6 +1256,7 @@
     "m_SGVersion": 2,
     "m_Type": "UnityEditor.Rendering.BuiltIn.ShaderGraph.BuiltInTarget",
     "m_ObjectId": "bedfde596aef4623a99d19b97aa820b3",
+    "m_Datas": [],
     "m_ActiveSubTarget": {
         "m_Id": "bc2a5e1c4a0347fab7618e628e6560c1"
     },

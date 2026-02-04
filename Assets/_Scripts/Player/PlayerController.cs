@@ -233,14 +233,14 @@ public class PlayerController : MonoBehaviour
         {
             _Stamima();
         }
-        /*if (Input.GetKeyDown(KeyCode.LeftShift) && mana > 0)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && mana > 0)
         {
             StopCoroutine(Shield());
             StartCoroutine(Shield());
-        }*/
+        }
 
-        //propertyBlock.SetFloat("_Alpha", _block);
-        //_meshRenderer.SetPropertyBlock(propertyBlock);
+        propertyBlock.SetFloat("_Alpha", _block);
+        _meshRenderer.SetPropertyBlock(propertyBlock);
 
         if (health <= 0)
         {
@@ -357,12 +357,12 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         _block = 0;
-        mana--;
+        mana -= 30;
         yield return new WaitForSeconds(0.5f);
-        while (mana > 0 && Input.GetKey(KeyCode.LeftShift))
+        while (mana > 0 && Input.GetKey(KeyCode.LeftControl))
         {
             _block += 0.2f;
-            mana--;
+            mana -= 30;
             yield return new WaitForSeconds(0.5f);
         }
         _block = 1;

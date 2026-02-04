@@ -62,7 +62,7 @@ public class EnemyController : MonoBehaviour
     {
         if (sturdy <= 0)
         {
-            //c_Animator.SetTrigger("Fall");
+            
             sturdy = maxSturdy;
         }
         if (health <= 0)
@@ -116,6 +116,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        c_Animator.SetFloat("Sturdy", sturdy);
         float dis = Vector3.Distance(targetObject.position, transform.position);
         if (dis <= 50f)
         {

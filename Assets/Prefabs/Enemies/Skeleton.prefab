@@ -442,7 +442,7 @@ MonoBehaviour:
   maxHealth: 25
   maxSturdy: 5
   sturdy: 0
-  c_Animator: {fileID: 0}
+  c_Animator: {fileID: 4730933630796287015}
   destination: {x: 0, y: 0, z: 0}
   isVisible: 0
   isClose: 0
@@ -625,7 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95d43a3965682d24387b7714dfe2826b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 50
   _D: 0
   enemy: {fileID: 0}
   hits: 0

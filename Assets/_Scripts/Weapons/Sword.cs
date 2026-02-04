@@ -20,6 +20,7 @@ public class Sword : MonoBehaviour
     public Animator c_Animator;
 
     public bool swing;
+    public bool wMode;
 
     public float swingCost;
 
@@ -66,6 +67,7 @@ public class Sword : MonoBehaviour
 
     void Start()
     {
+        wMode = false;
         filePath = Application.persistentDataPath;
         swordData = new SwordStatus();
         foreach (AnimatorControllerParameter parameter in c_Animator.parameters)
@@ -140,6 +142,14 @@ public class Sword : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && GetComponent<PlayerController>().stamina >= swingCost)
         {
             GetComponent<PlayerController>().stamina -= swingCost;
+            if(wMode & GetComponent<PlayerController>().mana >= swingCost)
+            {
+                GetComponent<PlayerController>().mana -= swingCost;
+            }
+            else if(wMode & GetComponent<PlayerController>().mana <= swingCost)
+            {
+                return;
+            }
             c_Animator.SetTrigger("Swing");
             StartCoroutine(PlayAnimation());
         }
@@ -152,6 +162,7 @@ public class Sword : MonoBehaviour
         }
         if (Input.GetKeyDown("r"))
         {
+            wMode = !wMode;
             c_Animator.SetTrigger("Switch");
             StartCoroutine(Switch());
         }
