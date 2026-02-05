@@ -217,6 +217,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(mana < 0)
+        {
+            mana = 0;
+        }
         //speed = 12;
         if (canMove)
         {

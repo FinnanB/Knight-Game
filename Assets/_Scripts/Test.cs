@@ -7,44 +7,56 @@ using System.IO;
 
 public class Test : MonoBehaviour
 {
-    public Animator c_Animator;
+    public float h;
+    public float s;
+    public float d;
+    public float[] statLevel;
 
-    public bool run;
+    public float playerLevel;
+    public float xp;
+    private float levelCost;
+    public float totalSpent;
 
-    public AnimatorStateInfo stateInfo;
-
-    public Collider bx;
-
-    void Update()
+    void Start()
     {
-        stateInfo = c_Animator.GetCurrentAnimatorStateInfo(0);
-        if (run)
+        statLevel = new float[] { 1,1,1};
+        levelCost = 10;
+        playerLevel = 1;
+        totalSpent = 0;
+    }
+
+   void Update()
+    {
+
+        h = 180 + (20 * statLevel[0]);
+        s = 135 + (15 * statLevel[1]);
+        d = 3 + (2 * statLevel[2]);
+    }
+
+    public void LevelUp(int stat)
+    {
+        if (xp >= levelCost)
         {
-            run = false;
-            c_Animator.SetTrigger("Start");
-            StartCoroutine(Play());
-            
+            playerLevel++;
+            statLevel[stat]++;
+            /*switch (stat)
+                {
+                case 0:
+                    h += 21 - statLevel[stat];
+                    break;
+                case 1:
+                    s += 16 - statLevel[stat];
+                    break;
+                case 2:
+                    d += 6 - statLevel[stat]/2;
+                    break;
+            }*/
+          //  Debug.Log(10 + (Mathf.Pow(1.1f, playerData.level)));
+           // playerData.maxHealth += playerData.maxHealth * 0.2f;
+           // playerData.damage += playerData.damage * 0.5f;
+            xp -= levelCost;
+            totalSpent += levelCost;
+            levelCost = 10 + (playerLevel * playerLevel);
         }
-    }
-
-
-
-    IEnumerator Play()
-    {
-        Debug.Log(Time.time);
-        Debug.Log(stateInfo.shortNameHash);
-        int cur = stateInfo.shortNameHash;
-        
-        yield return new WaitUntil(() => stateInfo.shortNameHash != cur);
-        bx.enabled = true;
-        yield return new WaitForSeconds(stateInfo.length);
-        bx.enabled = false;
-        c_Animator.SetTrigger("Return");
-        yield return null;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        bx.enabled = false;
     }
 }

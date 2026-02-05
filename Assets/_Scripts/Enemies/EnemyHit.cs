@@ -30,6 +30,7 @@ public class EnemyHit : MonoBehaviour
             if(other.GetComponent<PlayerController>()._block == 0)
             {
                 enemy.GetComponent<EnemyController>().sturdy = 0;
+                other.GetComponent<PlayerController>().mana += 30;
             }
         }
     }
