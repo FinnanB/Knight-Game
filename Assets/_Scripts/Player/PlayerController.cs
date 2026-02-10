@@ -335,13 +335,13 @@ public class PlayerController : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0f, cam.eulerAngles.y, 0f);
 
-       /* if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             c_Animator.SetFloat("Forward", horizontal);
             c_Animator.SetFloat("Sides", vertical);
-            c_Animator.SetTrigger("Dodge");
+            c_Animator.SetTrigger("Roll");
             //dodge = true;
-        }*/
+        }
         if (direction.magnitude >= 0.1f)
         {
             staminaRegening = false;
