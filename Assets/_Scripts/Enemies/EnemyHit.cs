@@ -24,7 +24,8 @@ public class EnemyHit : MonoBehaviour
         hits++;
         if (other.tag == "Player")
         {
-            m_MyAudioSource.Play();
+            // m_MyAudioSource.Play();
+            Debug.Log(other);
             other.GetComponent<PlayerController>().Hit(damage);
             //GetComponent<Collider>().enabled = false;
             if(other.GetComponent<PlayerController>()._block == 0)
