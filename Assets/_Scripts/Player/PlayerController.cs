@@ -428,10 +428,10 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator _Fall()
     {
-        hitZone.enabled = false;
+        //hitZone.enabled = false;
 
         yield return new WaitForSeconds(0.75f);
-        hitZone.enabled = true;
+        //hitZone.enabled = true;
        // yield return new WaitForSeconds(1f);
         sturdy = maxSturdy;
     }
