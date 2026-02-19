@@ -6,6 +6,8 @@ using Cinemachine;
 using System;
 using System.IO;
 using TMPro;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
+using UnityEngine.Rendering;
 
 public struct PlayerStatus
 {
@@ -89,6 +91,9 @@ public class PlayerController : MonoBehaviour
     public bool lockMouse;
     public Collider hitZone;
 
+    public float dodgeCost;
+
+    public bool canSprint;
     public static PlayerController Instance { get; private set; }
 
     void Awake()
@@ -190,6 +195,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Heal()
     {
+        canSprint = false;
         speed = 3;
         yield return new WaitForSeconds(0.3f);
         if (heals > 0)
@@ -199,25 +205,28 @@ public class PlayerController : MonoBehaviour
             heals--;
         }
         speed = 6;
+        canSprint = true;
     }
 
     IEnumerator MtoH()
     {
+        canSprint = false;
         speed = 1;
         yield return new WaitForSeconds(3f);
-        if (mana == playerData.maxMana)
+        if (mana >= 120)
         {
             heals = playerData.maxHeals;
             
-            mana = 0;
+            mana -= 120;
         }
         speed = 6;
+        canSprint = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(mana < 0)
+        if (mana < 0)
         {
             mana = 0;
         }
@@ -225,7 +234,10 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             Move();
-            Sprint();
+            if (canSprint)
+            {
+                Sprint();
+            }
         }
 
         
@@ -259,16 +271,16 @@ public class PlayerController : MonoBehaviour
         if (stamina < 0)
         {
             stamina = 0;
-            stamRegen = 1f;
+            stamRegen = 5f;
         }
         else if (stamina < playerData.maxStam)
         {
-            stamina += stamRegen;
+            stamina += stamRegen*Time.deltaTime;
         }
         else if (stamina >= playerData.maxStam)
         {
             stamina = playerData.maxStam;
-            stamRegen = 2f;
+            stamRegen = 10f;
         }
     }
 
@@ -335,11 +347,9 @@ public class PlayerController : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0f, cam.eulerAngles.y, 0f);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && stamina >= dodgeCost)
         {
-            c_Animator.SetFloat("Forward", horizontal);
-            c_Animator.SetFloat("Sides", vertical);
-            c_Animator.SetTrigger("Roll");
+            StartCoroutine(_Dodge(direction));
             //dodge = true;
         }
         if (direction.magnitude >= 0.1f)
@@ -355,6 +365,35 @@ public class PlayerController : MonoBehaviour
         {
             staminaRegening = true;
         }
+    }
+
+    IEnumerator _Dodge(Vector3 dir)
+    {
+        stamina -= dodgeCost;
+        staminaRegening = false;
+        canMove = false;
+        if (dir.magnitude == 0)
+        {
+            dir.z = 1f;
+        }
+        c_Animator.SetFloat("Forward", dir.z);
+        c_Animator.SetFloat("Sides", dir.x);
+        c_Animator.SetTrigger("Roll");
+        float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        Vector3 target = transform.position + dir*10;
+        Debug.Log(target);
+        float a = 0;
+        while (a < 1f)
+        {
+            float step = Time.deltaTime * 10;
+            controller.Move(moveDir*step);
+            a += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        canMove = true;
+        staminaRegening = true;
+        yield return null;
     }
 
     IEnumerator Shield()
@@ -456,7 +495,7 @@ public class PlayerController : MonoBehaviour
             
             stamina -= 30*Time.deltaTime;
             staminaRegening = false;
-            speed = 12;
+            speed = 8;
         }
         else
         {

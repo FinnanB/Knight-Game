@@ -233,11 +233,13 @@ public class Sword : MonoBehaviour
             yield return null;
         }
         ResetAnim();
+        GetComponent<PlayerController>().canSprint = false;
         GetComponent<PlayerController>().speed = 4;
         while (!changed)
         {
             yield return null;
         }
         GetComponent<PlayerController>().speed = 6;
+        GetComponent<PlayerController>().canSprint = true;
     }
 }
