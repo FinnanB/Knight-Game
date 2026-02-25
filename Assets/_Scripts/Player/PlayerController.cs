@@ -8,14 +8,16 @@ using System.IO;
 using TMPro;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using UnityEngine.Rendering;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public struct PlayerStatus
 {
     //public string playerName;
-    public float maxHealth;
+   /* public float maxHealth;
     public float maxStam;
     public float maxMana;
-    public float damage;
+    public float damage;*/
+    public int[] lvls;
     public int maxHeals;
     public int level;
     public int exp;
@@ -25,6 +27,12 @@ public struct PlayerStatus
 
 public class PlayerController : MonoBehaviour
 {
+    public float maxHealth;
+    public float maxStam;
+    public float maxMana;
+    public float strength;
+    public float dex;
+    public int levelCost;
     public CharacterController controller;
     public float speed = 6f;
     public Transform cam;
@@ -62,11 +70,18 @@ public class PlayerController : MonoBehaviour
     public RectTransform m_RectTransform3;
     public RectTransform h_RectTransform3;
 
+    public TMP_Text[] lvlsText;
+    public TMP_Text[] lvlsText2;
+    public Button[] buttons;
+
     public Image[] hImage;
     public Color c1, c2, c3;
 
     public int heals;
     public TMP_Text exp;
+    public TMP_Text exp2;
+    public TMP_Text _lvlCost;
+    public TMP_Text totalLvl;
 
     public float stamRegen;
     public bool staminaRegening;
@@ -110,6 +125,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        levelCost = 10 + (playerData.level * playerData.level);
         if(lockMouse)
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -120,6 +136,7 @@ public class PlayerController : MonoBehaviour
         // ResetData();
         
         LoadData();
+        
         //playerData.spawnPoint = spawnPoint;
         propertyBlock = new MaterialPropertyBlock();
         sturdy = maxSturdy;
@@ -151,10 +168,15 @@ public class PlayerController : MonoBehaviour
     public void ResetData()
     {
         playerData.maxHeals = 3;
-        playerData.maxMana = 150;
+        /*playerData.maxMana = 150;
         playerData.maxHealth = 200;
         playerData.maxStam = 200;
-        playerData.damage = 5;
+        playerData.damage = 5;*/
+        playerData.lvls = new int[5];
+        for (int i = 0; i < playerData.lvls.Length; i++)
+        {
+            playerData.lvls[i] = 1;
+        }
         playerData.weapon = 0;
         playerData.level = 0;
         playerData.exp = 0;
@@ -173,22 +195,26 @@ public class PlayerController : MonoBehaviour
 
     public void Reset()
     {
-        health = playerData.maxHealth;
-        stamina = playerData.maxStam;
-        mana = playerData.maxMana;
+        maxHealth = 180 + (20 * playerData.lvls[0]);
+        maxStam = 180 + (20 * playerData.lvls[1]);
+        maxMana = 135 + (15 * playerData.lvls[2]);
+        health = maxHealth;
+        stamina = maxStam;
+        mana = maxMana;
+        strength = 30 + (10 * playerData.lvls[3]);
+        dex = 10 + (4 * playerData.lvls[4]);
         heals = playerData.maxHeals;
         transform.position = playerData.spawnPoint;
     }
 
-    public void LevelUp()
+    public void LevelUp(int stat)
     {
-        if(playerData.exp >= (10*Mathf.Pow(1.5f, playerData.level)))
+        if(playerData.exp >= levelCost)
         {
             playerData.level++;
-            Debug.Log(10 + (Mathf.Pow(1.1f, playerData.level)));
-            playerData.maxHealth += playerData.maxHealth * 0.2f;
-            playerData.damage += playerData.damage * 0.5f;
-            playerData.exp -= 10;
+            playerData.lvls[stat]++;
+            playerData.exp -= levelCost;
+            levelCost = 10 + (playerData.level * playerData.level);
         }
         Reset();
     }
@@ -273,39 +299,42 @@ public class PlayerController : MonoBehaviour
             stamina = 0;
             stamRegen = 5f;
         }
-        else if (stamina < playerData.maxStam)
+        else if (stamina < maxStam)
         {
             stamina += stamRegen*Time.deltaTime;
         }
-        else if (stamina >= playerData.maxStam)
+        else if (stamina >= maxStam)
         {
-            stamina = playerData.maxStam;
+            stamina = maxStam;
             stamRegen = 10f;
         }
     }
 
     void _UI()
     {
-        healthSizeMax = playerData.maxHealth;
+        healthSizeMax = maxHealth;
         m_RectTransform.sizeDelta = new Vector2(healthSizeMax, m_RectTransform.sizeDelta.y);
         
-        float healthPerc = (playerData.maxHealth -health) / playerData.maxHealth;
+        float healthPerc = (maxHealth -health) / maxHealth;
         healthSize = (healthSizeMax * healthPerc) +5;
         h_RectTransform.offsetMax = new Vector2(-healthSize, -h_RectTransform.offsetMin.y);
 
-        stamSizeMax = playerData.maxStam;
+        stamSizeMax = maxStam;
         m_RectTransform3.sizeDelta = new Vector2(stamSizeMax, m_RectTransform3.sizeDelta.y);
 
-        float stamPerc = (playerData.maxStam - stamina) / playerData.maxStam;
+        float stamPerc = (maxStam - stamina) / maxStam;
         stamSize = (stamSizeMax * stamPerc) + 5;
         h_RectTransform3.offsetMax = new Vector2(-stamSize, -h_RectTransform3.offsetMin.y);
 
-        manaSizeMax = playerData.maxMana;
+        manaSizeMax = maxMana;
         m_RectTransform2.sizeDelta = new Vector2(manaSizeMax, m_RectTransform2.sizeDelta.y);
-        float manaPerc = (playerData.maxMana -mana)/ playerData.maxMana;
+        float manaPerc = (maxMana -mana)/ maxMana;
         manaSize = (manaSizeMax * manaPerc) + 5;
         h_RectTransform2.offsetMax = new Vector2(-manaSize, -h_RectTransform2.offsetMin.y);
         exp.text = new String("EXP: " + playerData.exp);
+        exp2.text = new String("EXP: " + playerData.exp);
+        _lvlCost.text = new String("Cost: " + levelCost);
+        totalLvl.text = new String("Total Level: " + playerData.level);
         for (int i = 0; i < hImage.Length; i++)
         {
             if(i< heals)
@@ -318,6 +347,26 @@ public class PlayerController : MonoBehaviour
                 hImage[i].color = c2;
             }
         }
+        for (int i = 0; i < lvlsText.Length; i++)
+        {
+            lvlsText[i].text = playerData.lvls[i].ToString();
+        }
+        for (int i  = 0;  i < playerData.lvls.Length; i ++)
+        {
+            if (playerData.lvls[i] == 10)
+            {
+                buttons[i].enabled = false;
+            }
+            else 
+            {
+                buttons[i].enabled = true;
+            }
+        }
+        lvlsText2[0].text = maxHealth.ToString();
+        lvlsText2[1].text = maxStam.ToString();
+        lvlsText2[2].text = maxMana.ToString();
+        lvlsText2[3].text = strength.ToString();
+        lvlsText2[4].text = dex.ToString();
     }
 
     void _Health()
@@ -331,8 +380,8 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(MtoH());
         }
         heals = Mathf.Min(playerData.maxHeals, heals);
-        health = Mathf.Min(playerData.maxHealth, health);
-        mana = Mathf.Min(playerData.maxMana, mana);
+        health = Mathf.Min(maxHealth, health);
+        mana = Mathf.Min(maxMana, mana);
     }
 
     void Move()

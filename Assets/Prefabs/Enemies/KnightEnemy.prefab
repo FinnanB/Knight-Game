@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -17.08
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_LocalPosition.y
@@ -892,11 +892,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 180
-  m_StoppingDistance: 2
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -968,12 +968,13 @@ MonoBehaviour:
   maxHealth: 200
   maxSturdy: 5
   sturdy: 0
-  c_Animator: {fileID: 0}
+  c_Animator: {fileID: 2743152669886766565}
   destination: {x: 0, y: 0, z: 0}
   isVisible: 0
   isClose: 0
   targetObject: {fileID: 0}
   eyes: {fileID: 7563411303228068749}
+  armor: 20
   seen: 0
   xp: 10
   startPos: {x: 0, y: 0, z: 0}
@@ -990,6 +991,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   c_Animator: {fileID: 2743152669886766565}
+  wTime: 1
+  canSwing: 0
   sw1: {fileID: 6715813437021280076}
 --- !u!4 &7563411303228068749 stripped
 Transform:

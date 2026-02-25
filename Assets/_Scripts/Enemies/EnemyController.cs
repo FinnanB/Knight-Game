@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EnemyController : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class EnemyController : MonoBehaviour
     public Transform targetObject;
     public Transform eyes;
 
+    public float armor;
+
     public bool seen;
 
     public int xp;
@@ -32,12 +35,26 @@ public class EnemyController : MonoBehaviour
 
 
 
-    public void Hit(float dam, GameObject other)
+    public void Hit(float dam, GameObject other, bool damageType)
     {
         targetObject = other.transform;
         seen = true;
         StopCoroutine(_Fall());
-        health -= dam;
+        float damageTaken;
+        if (damageType)
+        {
+            damageTaken = Mathf.Max(1, dam-armor);
+        }
+        else
+        {
+            damageTaken = Mathf.Max(0, dam - armor);
+        }
+        if(damageTaken == 0)
+        {
+            other.GetComponent<Animator>().SetTrigger("HitWrong");
+        }
+        health -= damageTaken;
+        Debug.Log(damageTaken);
         sturdy--;
         StartCoroutine(_Fall());
     }

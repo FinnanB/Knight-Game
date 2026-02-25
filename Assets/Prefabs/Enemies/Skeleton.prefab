@@ -448,6 +448,7 @@ MonoBehaviour:
   isClose: 0
   targetObject: {fileID: 0}
   eyes: {fileID: 5550170682908606651}
+  armor: 0
   seen: 0
   xp: 2
   startPos: {x: 0, y: 0, z: 0}
@@ -461,11 +462,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 5
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 180
-  m_StoppingDistance: 1
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -579,6 +580,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   c_Animator: {fileID: 4730933630796287015}
+  wTime: 0
+  canSwing: 0
   sw1: {fileID: 2562155176999382318}
 --- !u!4 &2286934462487965228 stripped
 Transform:
