@@ -136,6 +136,7 @@ public class Sword : MonoBehaviour
 
     void Update()
     {
+        c_Animator.SetBool("Switch", wMode);
         totalMoves = swordData.level;
         moveCount.text = "Attacks: " + currentMoves + "/" + totalMoves;
 
@@ -163,7 +164,7 @@ public class Sword : MonoBehaviour
         if (Input.GetKeyDown("r"))
         {
             wMode = !wMode;
-            c_Animator.SetTrigger("Switch");
+            
             StartCoroutine(Switch());
         }
 

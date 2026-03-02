@@ -107,8 +107,10 @@ public class PlayerController : MonoBehaviour
     public Collider hitZone;
 
     public float dodgeCost;
+    bool hasDied; 
 
     public bool canSprint;
+    int layerIndex;
     public static PlayerController Instance { get; private set; }
 
     void Awake()
@@ -125,6 +127,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        layerIndex = c_Animator.GetLayerIndex("Walk");
         levelCost = 10 + (playerData.level * playerData.level);
         if(lockMouse)
         {
@@ -139,7 +142,7 @@ public class PlayerController : MonoBehaviour
         
         //playerData.spawnPoint = spawnPoint;
         propertyBlock = new MaterialPropertyBlock();
-        sturdy = maxSturdy;
+        sturdy = 0;
         Reset();
     }
 
@@ -222,6 +225,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Heal()
     {
         canSprint = false;
+
         speed = 3;
         yield return new WaitForSeconds(0.3f);
         if (heals > 0)
@@ -252,6 +256,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Sturdy();
         if (mana < 0)
         {
             mana = 0;
@@ -284,11 +289,10 @@ public class PlayerController : MonoBehaviour
         propertyBlock.SetFloat("_Alpha", _block);
         _meshRenderer.SetPropertyBlock(propertyBlock);
 
-        if (health <= 0)
+        if (health <= 0 && !hasDied)
         {
-            playerData.exp = 0;
-            SaveData();
-            Destroy(gameObject);
+            hasDied = true;
+            StartCoroutine(_Death());
         }
     }
 
@@ -418,6 +422,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator _Dodge(Vector3 dir)
     {
+        StopAllCoroutines();
         stamina -= dodgeCost;
         staminaRegening = false;
         canMove = false;
@@ -506,34 +511,62 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Hit(float dam)
+    public void Hit(float dam, Vector3 dir)
     {
-        StopCoroutine(_Fall());
+        StopAllCoroutines();
         health -= dam*_block;
-        sturdy--;
-        StartCoroutine(_Fall());
+        sturdy += dam / 3 ;
+        if (dam >= maxSturdy / 5)
+        {
+            c_Animator.SetTrigger("Stumble");
+        }
+        StartCoroutine(_Hit(dir));
+    }
+
+    IEnumerator _Hit(Vector3 dir)
+    {
+        float a = 0;
+        float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        while (a < 1f)
+        {
+            float step = Time.deltaTime * 3;
+            
+            controller.Move(moveDir * step);
+            a += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        yield return new WaitForSeconds(1f);
+        sturdy = 0;
+    }
+
+    IEnumerator _Death()
+    {
+        c_Animator.SetLayerWeight(layerIndex, 0);
+        hitZone.enabled = false;
+        c_Animator.SetBool("Died", hasDied);
+        playerData.exp = 0;
+        SaveData();
+        yield return new WaitForSeconds(1.5f);
+        Destroy(gameObject);
     }
 
     IEnumerator _Fall()
     {
-        //hitZone.enabled = false;
-
-        yield return new WaitForSeconds(0.75f);
-        //hitZone.enabled = true;
-       // yield return new WaitForSeconds(1f);
-        sturdy = maxSturdy;
+        c_Animator.SetLayerWeight(layerIndex, 0);
+        canMove = false;
+        yield return new WaitForSeconds(1.5f);
+        c_Animator.SetLayerWeight(layerIndex, 1);
+        canMove = true;
     }
 
     void Sturdy()
     {
-        if (sturdy <= 0)
+        if (sturdy >= maxSturdy)
         {
             c_Animator.SetTrigger("Fall");
-            sturdy = maxSturdy;
-        }
-        if (health <= 0)
-        {
-            gameObject.SetActive(false);
+            StartCoroutine(_Fall());
+            sturdy = 0;
         }
     }
 
