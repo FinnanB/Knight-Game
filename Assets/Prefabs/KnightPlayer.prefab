@@ -890,9 +890,9 @@ MonoBehaviour:
   - {fileID: 0}
   currentMoves: 0
   totalMoves: 0
-  sw1: {fileID: 0}
-  sw2: {fileID: 0}
-  sw3: {fileID: 0}
+  sw1: {fileID: 5836968207710563818}
+  sw2: {fileID: 3476577463988850110}
+  sw3: {fileID: 7916945023813055753}
   lvl: 0
   run: 0
   moveCount: {fileID: 0}

@@ -6,9 +6,7 @@ using Cinemachine;
 using System;
 using System.IO;
 using TMPro;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using UnityEngine.Rendering;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public struct PlayerStatus
 {
