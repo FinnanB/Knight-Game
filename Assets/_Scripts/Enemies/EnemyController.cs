@@ -28,6 +28,8 @@ public class EnemyController : MonoBehaviour
 
     public bool seen;
 
+    bool hasDied;
+
     public int xp;
 
     public Vector3 startPos;
@@ -61,6 +63,8 @@ public class EnemyController : MonoBehaviour
 
     public void Reset()
     {
+        hasDied = false;
+        c_Animator.SetTrigger("Reset");
         health = maxHealth;
         transform.position = startPos;
         transform.eulerAngles = startEulerAngles;
@@ -81,11 +85,6 @@ public class EnemyController : MonoBehaviour
         {
             
             sturdy = maxSturdy;
-        }
-        if (health <= 0)
-        {
-            targetObject.GetComponent<PlayerController>().playerData.exp += xp; 
-            gameObject.SetActive(false);
         }
     }
 
@@ -133,7 +132,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        c_Animator.SetFloat("Sturdy", sturdy);
         float dis = Vector3.Distance(targetObject.position, transform.position);
         if (dis <= 50f)
         {
@@ -163,10 +161,21 @@ public class EnemyController : MonoBehaviour
         }
         canSee();
         Sturdy();
-        if(health <= 0)
+        if(health <= 0 && !hasDied)
         {
-            gameObject.SetActive(false);
+            StartCoroutine(_Death());
         }
         navAgent.SetDestination(destination);
+    }
+
+    IEnumerator _Death()
+    {
+        hasDied = true;
+        targetObject.GetComponent<PlayerController>().playerData.exp += xp;
+        c_Animator.SetBool("Died", true);
+        yield return new WaitForEndOfFrame();
+        c_Animator.SetBool("Died", false);
+        yield return new WaitForSeconds(1.25f);
+        gameObject.SetActive(false);
     }
 }

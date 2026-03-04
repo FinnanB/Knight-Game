@@ -526,13 +526,13 @@ public class PlayerController : MonoBehaviour
     IEnumerator _Hit(Vector3 dir)
     {
         float a = 0;
-        float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        while (a < 1f)
+        Vector3 moveDir = dir - transform.position;
+        Debug.Log(moveDir);
+        while (a < 0.6f)
         {
-            float step = Time.deltaTime * 3;
+            float step = Time.deltaTime *1f;
             
-            controller.Move(moveDir * step);
+            controller.Move(moveDir * -step);
             a += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
@@ -544,10 +544,12 @@ public class PlayerController : MonoBehaviour
     {
         c_Animator.SetLayerWeight(layerIndex, 0);
         hitZone.enabled = false;
-        c_Animator.SetBool("Died", hasDied);
+        c_Animator.SetBool("Died", true);
         playerData.exp = 0;
         SaveData();
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForEndOfFrame();
+        c_Animator.SetBool("Died", false);
+        yield return new WaitForSeconds(1.25f);
         Destroy(gameObject);
     }
 
@@ -562,7 +564,7 @@ public class PlayerController : MonoBehaviour
 
     void Sturdy()
     {
-        if (sturdy >= maxSturdy)
+        if (sturdy >= maxSturdy && health > 0)
         {
             c_Animator.SetTrigger("Fall");
             StartCoroutine(_Fall());
