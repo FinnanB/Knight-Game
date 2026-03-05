@@ -59,6 +59,7 @@ public class SceneController : MonoBehaviour
             enemy.GetComponent<EnemyController>().Reset();
         }
         player.GetComponent<PlayerController>().SetPosition();
+        player.GetComponent<Sword>().swing = false;
         player.GetComponent<PlayerController>().Reset();
        // player.GetComponent<Bow>().arrows = player.GetComponent<Bow>().maxArrows;
     }
@@ -66,6 +67,7 @@ public class SceneController : MonoBehaviour
     public void UnPause()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        player.GetComponent<Sword>().swing = true;
         Time.timeScale = 1;
         pause.SetActive(false);
        // mInput.SetActive(true);

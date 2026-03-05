@@ -42,7 +42,7 @@ public class PlayerHit : MonoBehaviour
         else if (other.tag != "Enemy" && !damageType) 
         {
             //Debug.Log(other.gameObject);
-            _Player.GetComponent<Animator>().SetTrigger("HitWrong");
+            //_Player.GetComponent<Animator>().SetTrigger("HitWrong");
         }
     }
 }

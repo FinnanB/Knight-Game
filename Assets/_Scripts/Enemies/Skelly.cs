@@ -39,13 +39,13 @@ public class Skelly : MonoBehaviour
         AnimatorStateInfo stateInfo = c_Animator.GetCurrentAnimatorStateInfo(0);
         int cur = stateInfo.shortNameHash;
         canSwing = false;
-        yield return new WaitUntil(() => c_Animator.GetCurrentAnimatorStateInfo(0).shortNameHash != cur);
+       /* yield return new WaitUntil(() => c_Animator.GetCurrentAnimatorStateInfo(0).shortNameHash != cur);
         stateInfo = c_Animator.GetCurrentAnimatorStateInfo(0);
         GetComponent<NavMeshAgent>().speed = 0;
         sw1.enabled = true;
         yield return new WaitForSeconds(stateInfo.length);
         GetComponent<NavMeshAgent>().speed = 5;
-        sw1.enabled = false;
+        sw1.enabled = false;*/
         yield return new WaitForSeconds(wTime);
         canSwing = true;
         yield return null;

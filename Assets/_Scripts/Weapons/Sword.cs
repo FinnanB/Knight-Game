@@ -67,6 +67,7 @@ public class Sword : MonoBehaviour
 
     void Start()
     {
+        swing = true;
         wMode = false;
         filePath = Application.persistentDataPath;
         swordData = new SwordStatus();
@@ -140,7 +141,7 @@ public class Sword : MonoBehaviour
         totalMoves = swordData.level;
         moveCount.text = "Attacks: " + currentMoves + "/" + totalMoves;
 
-        if (Input.GetMouseButtonDown(0) && GetComponent<PlayerController>().stamina >= swingCost)
+        if (Input.GetMouseButtonDown(0) && GetComponent<PlayerController>().stamina >= swingCost && swing)
         {
             GetComponent<PlayerController>().stamina -= swingCost;
             if(wMode & GetComponent<PlayerController>().mana >= swingCost)
@@ -154,7 +155,7 @@ public class Sword : MonoBehaviour
             c_Animator.SetTrigger("Swing");
             StartCoroutine(PlayAnimation());
         }
-        if (Input.GetMouseButtonDown(1) && GetComponent<PlayerController>().stamina >= swingCost*2 && GetComponent<PlayerController>().mana >= swingCost * 2)
+        if (Input.GetMouseButtonDown(1) && GetComponent<PlayerController>().stamina >= swingCost*2 && GetComponent<PlayerController>().mana >= swingCost * 2 && swing)
         {
             GetComponent<PlayerController>().stamina -= swingCost;
             GetComponent<PlayerController>().mana -= swingCost;
@@ -206,6 +207,7 @@ public class Sword : MonoBehaviour
 
     IEnumerator PlayAnimation()
     {
+        swing = false;
         AnimatorStateInfo stateInfo = c_Animator.GetCurrentAnimatorStateInfo(0);
         int cur = stateInfo.shortNameHash;
         
@@ -224,6 +226,7 @@ public class Sword : MonoBehaviour
         sw1.enabled = false;
         sw2.enabled = false;
         sw3.enabled = false;
+        swing = true;
         yield return null;
     }
 

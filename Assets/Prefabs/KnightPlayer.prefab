@@ -830,7 +830,7 @@ MonoBehaviour:
   stamRegen: 0
   staminaRegening: 0
   _block: 1
-  maxSturdy: 3
+  maxSturdy: 50
   sturdy: 0
   c_Animator: {fileID: 8083375483367221022}
   _meshRenderer: {fileID: 1835571130889032014}

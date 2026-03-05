@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour
         }
         health -= damageTaken;
         Debug.Log(damageTaken);
-        sturdy--;
+        sturdy += damageTaken/5;
         StartCoroutine(_Fall());
     }
 
@@ -75,16 +75,18 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator _Fall()
     {
-        yield return new WaitForSeconds(10f);
-        sturdy = maxSturdy;
+        yield return new WaitForSeconds(1.5f);
+        //sturdy = maxSturdy;
     }
 
     void Sturdy()
     {
-        if (sturdy <= 0)
+        if (sturdy >= maxSturdy && health > 0)
         {
-            
-            sturdy = maxSturdy;
+            Debug.Log(sturdy);
+            c_Animator.SetTrigger("Fall");
+            StartCoroutine(_Fall());
+            sturdy = 0;
         }
     }
 

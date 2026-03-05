@@ -402,6 +402,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && stamina >= dodgeCost)
         {
+            StopAllCoroutines();
             StartCoroutine(_Dodge(direction));
             //dodge = true;
         }
@@ -422,7 +423,8 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator _Dodge(Vector3 dir)
     {
-        StopAllCoroutines();
+        //StopAllCoroutines();
+        
         stamina -= dodgeCost;
         staminaRegening = false;
         canMove = false;
@@ -436,7 +438,7 @@ public class PlayerController : MonoBehaviour
         float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         Vector3 target = transform.position + dir*10;
-        Debug.Log(target);
+        //Debug.Log(target);
         float a = 0;
         while (a < 1f)
         {
@@ -445,6 +447,7 @@ public class PlayerController : MonoBehaviour
             a += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        Debug.Log("h");
         canMove = true;
         staminaRegening = true;
         yield return null;
@@ -514,9 +517,11 @@ public class PlayerController : MonoBehaviour
     public void Hit(float dam, Vector3 dir)
     {
         StopAllCoroutines();
+        //Debug.Log("h");
         health -= dam*_block;
-        sturdy += dam / 3 ;
-        if (dam >= maxSturdy / 5)
+        float sturDam = dam / 3;
+        sturdy += sturDam;
+        if (sturDam >= maxSturdy / 5)
         {
             c_Animator.SetTrigger("Stumble");
         }
@@ -525,9 +530,10 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator _Hit(Vector3 dir)
     {
+        canMove = false;
         float a = 0;
         Vector3 moveDir = dir - transform.position;
-        Debug.Log(moveDir);
+        //Debug.Log(moveDir);
         while (a < 0.6f)
         {
             float step = Time.deltaTime *1f;
@@ -537,6 +543,7 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(1f);
+        canMove = true;
         sturdy = 0;
     }
 
@@ -559,6 +566,7 @@ public class PlayerController : MonoBehaviour
         canMove = false;
         yield return new WaitForSeconds(1.5f);
         c_Animator.SetLayerWeight(layerIndex, 1);
+        canMove = true;
         canMove = true;
     }
 
