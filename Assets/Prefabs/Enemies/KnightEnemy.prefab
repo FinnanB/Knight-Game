@@ -418,7 +418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -109924316318233586, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 321275006538125003, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_Layer
@@ -733,6 +733,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7055494320295820229, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055494320295820229, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.0000034150944
       objectReference: {fileID: 0}
@@ -1024,9 +1028,9 @@ CapsuleCollider:
   m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 4.5
+  m_Height: 4
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 2}
 --- !u!114 &4542636100207169271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,5 +1045,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 50
   _D: 0
-  enemy: {fileID: 0}
+  enemy: {fileID: 443637304632334573}
   hits: 0

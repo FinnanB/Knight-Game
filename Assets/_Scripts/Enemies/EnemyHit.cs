@@ -15,7 +15,7 @@ public class EnemyHit : MonoBehaviour
     void Start()
     {
         m_MyAudioSource = GetComponent<AudioSource>();
-        enemy = transform.root.gameObject;
+        //enemy = PrefabUtility.GetOutermostPrefabInstanceRoot(gameObject); ;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,11 +25,12 @@ public class EnemyHit : MonoBehaviour
         if (other.tag == "Player")
         {
             // m_MyAudioSource.Play();
-            Debug.Log(other);
+            Debug.Log("a");
             other.GetComponent<PlayerController>().Hit(damage, transform.position);
             //GetComponent<Collider>().enabled = false;
             if(other.GetComponent<PlayerController>()._block == 0)
             {
+                Debug.Log("h");
                 enemy.GetComponent<EnemyController>().sturdy += 5;
                 other.GetComponent<PlayerController>().mana += 30;
             }

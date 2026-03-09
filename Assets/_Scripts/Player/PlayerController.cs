@@ -455,7 +455,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Shield()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.15f);
         _block = 0;
         mana -= 30;
         yield return new WaitForSeconds(0.5f);
@@ -518,7 +518,8 @@ public class PlayerController : MonoBehaviour
     {
         StopAllCoroutines();
         //Debug.Log("h");
-        health -= dam*_block;
+        dam = dam * _block;
+        health -= dam;
         float sturDam = dam / 3;
         sturdy += sturDam;
         if (sturDam >= maxSturdy / 5)

@@ -56,7 +56,6 @@ public class EnemyController : MonoBehaviour
             other.GetComponent<Animator>().SetTrigger("HitWrong");
         }
         health -= damageTaken;
-        Debug.Log(damageTaken);
         sturdy += damageTaken/5;
         StartCoroutine(_Fall());
     }
@@ -96,7 +95,7 @@ public class EnemyController : MonoBehaviour
         startEulerAngles = transform.eulerAngles;
         seen = false;
         navAgent = GetComponent<NavMeshAgent>();
-        sturdy = maxSturdy;
+        sturdy = 0;
         destination = transform.position;
         targetObject = GameObject.FindGameObjectWithTag("Player").transform;
     }
