@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove;
 
+
     public bool lockMouse;
     public Collider hitZone;
 
@@ -111,6 +112,9 @@ public class PlayerController : MonoBehaviour
 
     public bool canSprint;
     int layerIndex;
+
+    float sturdyTime;
+    public float sturdyResetTime;
     public static PlayerController Instance { get; private set; }
 
     void Awake()
@@ -127,6 +131,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        sturdyTime = 0;
         layerIndex = c_Animator.GetLayerIndex("Walk");
         levelCost = 10 + (playerData.level * playerData.level);
         if(lockMouse)
@@ -265,6 +270,11 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             Move();
+            if (Input.GetKeyDown(KeyCode.LeftControl) && mana > 0)
+            {
+                StopCoroutine(Shield());
+                StartCoroutine(Shield());
+            }
             if (canSprint)
             {
                 Sprint();
@@ -280,11 +290,7 @@ public class PlayerController : MonoBehaviour
         {
             _Stamima();
         }
-        if (Input.GetKeyDown(KeyCode.LeftControl) && mana > 0)
-        {
-            StopCoroutine(Shield());
-            StartCoroutine(Shield());
-        }
+        
 
         propertyBlock.SetFloat("_Alpha", _block);
         _meshRenderer.SetPropertyBlock(propertyBlock);
@@ -447,7 +453,6 @@ public class PlayerController : MonoBehaviour
             a += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        Debug.Log("h");
         canMove = true;
         staminaRegening = true;
         yield return null;
@@ -455,7 +460,13 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Shield()
     {
+<<<<<<< Updated upstream
         yield return new WaitForSeconds(0.15f);
+=======
+        canSprint = false;
+
+        yield return new WaitForSeconds(0.3f);
+>>>>>>> Stashed changes
         _block = 0;
         mana -= 30;
         yield return new WaitForSeconds(0.5f);
@@ -514,42 +525,52 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     public void Hit(float dam, Vector3 dir)
     {
-        StopAllCoroutines();
         //Debug.Log("h");
+<<<<<<< Updated upstream
         dam = dam * _block;
+=======
+        dam = dam*_block;
+>>>>>>> Stashed changes
         health -= dam;
         float sturDam = dam / 3;
+        if (sturDam > 0)
+        {
+            sturdyTime = 0;
+        }
         sturdy += sturDam;
         if (sturDam >= maxSturdy / 5)
         {
             c_Animator.SetTrigger("Stumble");
+            StartCoroutine(_Stumble(dir));
         }
-        StartCoroutine(_Hit(dir));
     }
 
-    IEnumerator _Hit(Vector3 dir)
+    IEnumerator _Stumble(Vector3 dir)
     {
         canMove = false;
+        _block = 1f;
         float a = 0;
         Vector3 moveDir = dir - transform.position;
         //Debug.Log(moveDir);
         while (a < 0.6f)
         {
-            float step = Time.deltaTime *1f;
-            
+            float step = Time.deltaTime * 1f;
+
             controller.Move(moveDir * -step);
             a += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForSeconds(1f);
         canMove = true;
-        sturdy = 0;
+        yield return null;
     }
 
     IEnumerator _Death()
     {
+        canMove = false;
+        _block = 1f;
         c_Animator.SetLayerWeight(layerIndex, 0);
         hitZone.enabled = false;
         c_Animator.SetBool("Died", true);
@@ -563,19 +584,35 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator _Fall()
     {
+        _block = 1f;
         c_Animator.SetLayerWeight(layerIndex, 0);
         canMove = false;
         yield return new WaitForSeconds(1.5f);
         c_Animator.SetLayerWeight(layerIndex, 1);
         canMove = true;
-        canMove = true;
     }
 
     void Sturdy()
     {
+        
+        if (sturdy > 0)
+        {
+            sturdyTime += Time.deltaTime;
+        }
+        else if(sturdy == 0)
+        {
+            sturdyTime = 0;
+        }
+
+        if(sturdyTime >= sturdyResetTime)
+        {
+            sturdy = 0;
+        }
+
         if (sturdy >= maxSturdy && health > 0)
         {
             c_Animator.SetTrigger("Fall");
+            StopAllCoroutines();
             StartCoroutine(_Fall());
             sturdy = 0;
         }

@@ -8,6 +8,8 @@ public class PlayerHit : MonoBehaviour
     public float damageMult;
     public float trueDamage;
 
+    public bool hitWall;
+
     public GameObject _Player;
 
     AudioSource m_MyAudioSource;
@@ -34,15 +36,15 @@ public class PlayerHit : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            Debug.Log(other.gameObject);
+          //  Debug.Log(other.gameObject);
             other.GetComponent<EnemyController>().Hit(trueDamage, _Player, damageType);
             _Player.GetComponent<PlayerController>().mana +=10;
             m_MyAudioSource.Play();
         }
-        else if (other.tag != "Enemy" && !damageType) 
+        else if (other.tag != "Enemy" && !damageType && hitWall) 
         {
             //Debug.Log(other.gameObject);
-            //_Player.GetComponent<Animator>().SetTrigger("HitWrong");
+            _Player.GetComponent<Animator>().SetTrigger("HitWrong");
         }
     }
 }

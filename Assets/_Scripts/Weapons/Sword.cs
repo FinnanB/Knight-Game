@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 using System.IO;
 using TMPro;
+using UnityEditor;
 
 public struct SwordStatus
 {
@@ -232,17 +233,12 @@ public class Sword : MonoBehaviour
 
     IEnumerator Switch()
     {
-        while (changed)
-        {
-            yield return null;
-        }
         ResetAnim();
+        swing = false;
         GetComponent<PlayerController>().canSprint = false;
         GetComponent<PlayerController>().speed = 4;
-        while (!changed)
-        {
-            yield return null;
-        }
+        yield return new WaitForSeconds(1.15f);
+        swing = true;
         GetComponent<PlayerController>().speed = 6;
         GetComponent<PlayerController>().canSprint = true;
     }

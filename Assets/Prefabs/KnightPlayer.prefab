@@ -71,6 +71,7 @@ MonoBehaviour:
   damageType: 0
   damageMult: 0
   trueDamage: 0
+  hitWall: 0
   _Player: {fileID: 0}
 --- !u!1 &8572441786740142270
 GameObject:
@@ -840,6 +841,7 @@ MonoBehaviour:
   hitZone: {fileID: 0}
   dodgeCost: 0
   canSprint: 0
+  sturdyResetTime: 0
 --- !u!143 &6973506987620911161
 CharacterController:
   m_ObjectHideFlags: 0
@@ -951,7 +953,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.3
   m_Height: 3.52
@@ -972,6 +974,7 @@ MonoBehaviour:
   damageType: 0
   damageMult: 0
   trueDamage: 0
+  hitWall: 0
   _Player: {fileID: 0}
 --- !u!1 &6567267569769985192 stripped
 GameObject:
@@ -1016,4 +1019,5 @@ MonoBehaviour:
   damageType: 0
   damageMult: 0
   trueDamage: 0
+  hitWall: 0
   _Player: {fileID: 0}

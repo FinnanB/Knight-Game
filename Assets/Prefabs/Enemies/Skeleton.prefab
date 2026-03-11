@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   _D: 0
-  enemy: {fileID: 0}
+  enemy: {fileID: 1510678856435102870}
   hits: 0
 --- !u!82 &795881109234960344
 AudioSource:
