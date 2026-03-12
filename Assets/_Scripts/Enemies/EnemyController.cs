@@ -35,7 +35,8 @@ public class EnemyController : MonoBehaviour
     public Vector3 startPos;
     Vector3 startEulerAngles;
 
-
+    float sturdyTime;
+    public float sturdyResetTime;
 
     public void Hit(float dam, GameObject other, bool damageType)
     {
@@ -56,7 +57,12 @@ public class EnemyController : MonoBehaviour
             other.GetComponent<Animator>().SetTrigger("HitWrong");
         }
         health -= damageTaken;
-        sturdy += damageTaken/5;
+        float sturDam = damageTaken / 3;
+        if (sturDam > 0)
+        {
+            sturdyTime = 0;
+        }
+        sturdy += sturDam;
         StartCoroutine(_Fall());
     }
 
@@ -82,9 +88,22 @@ public class EnemyController : MonoBehaviour
 
     void Sturdy()
     {
+        if (sturdy > 0)
+        {
+            sturdyTime += Time.deltaTime;
+        }
+        else if (sturdy == 0)
+        {
+            sturdyTime = 0;
+        }
+
+        if (sturdyTime >= sturdyResetTime)
+        {
+            sturdy = 0;
+        }
         if (sturdy >= maxSturdy && health > 0)
         {
-            Debug.Log(sturdy);
+           // Debug.Log(sturdy);
             c_Animator.SetTrigger("Fall");
             StartCoroutine(_Fall());
             sturdy = 0;
@@ -93,6 +112,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        sturdyTime = 0;
         startPos = transform.position;
         startEulerAngles = transform.eulerAngles;
         seen = false;

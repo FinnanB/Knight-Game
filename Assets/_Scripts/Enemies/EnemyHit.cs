@@ -30,7 +30,7 @@ public class EnemyHit : MonoBehaviour
             //GetComponent<Collider>().enabled = false;
             if(other.GetComponent<PlayerController>()._block == 0)
             {
-                Debug.Log("h");
+                //Debug.Log("h");
                 enemy.GetComponent<EnemyController>().sturdy += 5;
                 other.GetComponent<PlayerController>().mana += 30;
             }
