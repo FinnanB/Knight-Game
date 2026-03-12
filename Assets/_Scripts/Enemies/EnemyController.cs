@@ -56,10 +56,6 @@ public class EnemyController : MonoBehaviour
             other.GetComponent<Animator>().SetTrigger("HitWrong");
         }
         health -= damageTaken;
-<<<<<<< Updated upstream
-=======
-       // Debug.Log(damageTaken);
->>>>>>> Stashed changes
         sturdy += damageTaken/5;
         StartCoroutine(_Fall());
     }
@@ -101,11 +97,7 @@ public class EnemyController : MonoBehaviour
         startEulerAngles = transform.eulerAngles;
         seen = false;
         navAgent = GetComponent<NavMeshAgent>();
-<<<<<<< Updated upstream
         sturdy = 0;
-=======
-        //sturdy = maxSturdy;
->>>>>>> Stashed changes
         destination = transform.position;
         targetObject = GameObject.FindGameObjectWithTag("Player").transform;
     }

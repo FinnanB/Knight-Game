@@ -460,13 +460,9 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Shield()
     {
-<<<<<<< Updated upstream
-        yield return new WaitForSeconds(0.15f);
-=======
         canSprint = false;
 
-        yield return new WaitForSeconds(0.3f);
->>>>>>> Stashed changes
+        yield return new WaitForSeconds(0.15f);
         _block = 0;
         mana -= 30;
         yield return new WaitForSeconds(0.5f);
@@ -528,12 +524,7 @@ public class PlayerController : MonoBehaviour
 
     public void Hit(float dam, Vector3 dir)
     {
-        //Debug.Log("h");
-<<<<<<< Updated upstream
         dam = dam * _block;
-=======
-        dam = dam*_block;
->>>>>>> Stashed changes
         health -= dam;
         float sturDam = dam / 3;
         if (sturDam > 0)

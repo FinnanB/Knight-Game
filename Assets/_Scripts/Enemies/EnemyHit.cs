@@ -15,11 +15,8 @@ public class EnemyHit : MonoBehaviour
     void Start()
     {
         m_MyAudioSource = GetComponent<AudioSource>();
-<<<<<<< Updated upstream
-        //enemy = PrefabUtility.GetOutermostPrefabInstanceRoot(gameObject); ;
-=======
+        //enemy = PrefabUtility.GetOutermostPrefabInstanceRoot(gameObject);
         //enemy = transform.root.gameObject;
->>>>>>> Stashed changes
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,11 +26,6 @@ public class EnemyHit : MonoBehaviour
         if (other.tag == "Player")
         {
             // m_MyAudioSource.Play();
-<<<<<<< Updated upstream
-            Debug.Log("a");
-=======
-           // Debug.Log(other);
->>>>>>> Stashed changes
             other.GetComponent<PlayerController>().Hit(damage, transform.position);
             //GetComponent<Collider>().enabled = false;
             if(other.GetComponent<PlayerController>()._block == 0)
