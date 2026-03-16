@@ -326,20 +326,20 @@ public class PlayerController : MonoBehaviour
         m_RectTransform.sizeDelta = new Vector2(healthSizeMax, m_RectTransform.sizeDelta.y);
         
         float healthPerc = (maxHealth -health) / maxHealth;
-        healthSize = (healthSizeMax * healthPerc) +5;
+        healthSize = (healthSizeMax * healthPerc);
         h_RectTransform.offsetMax = new Vector2(-healthSize, -h_RectTransform.offsetMin.y);
 
         stamSizeMax = maxStam;
         m_RectTransform3.sizeDelta = new Vector2(stamSizeMax, m_RectTransform3.sizeDelta.y);
 
         float stamPerc = (maxStam - stamina) / maxStam;
-        stamSize = (stamSizeMax * stamPerc) + 5;
+        stamSize = (stamSizeMax * stamPerc);
         h_RectTransform3.offsetMax = new Vector2(-stamSize, -h_RectTransform3.offsetMin.y);
 
         manaSizeMax = maxMana;
         m_RectTransform2.sizeDelta = new Vector2(manaSizeMax, m_RectTransform2.sizeDelta.y);
         float manaPerc = (maxMana -mana)/ maxMana;
-        manaSize = (manaSizeMax * manaPerc) + 5;
+        manaSize = (manaSizeMax * manaPerc);
         h_RectTransform2.offsetMax = new Vector2(-manaSize, -h_RectTransform2.offsetMin.y);
         exp.text = new String("EXP: " + playerData.exp);
         exp2.text = new String("EXP: " + playerData.exp);
@@ -347,14 +347,14 @@ public class PlayerController : MonoBehaviour
         totalLvl.text = new String("Total Level: " + playerData.level);
         for (int i = 0; i < hImage.Length; i++)
         {
-            if(i< heals)
+            if(i < heals)
             {
-                
-                hImage[i].color = c1;
+
+                hImage[i].enabled = true;
             }
             else
             {
-                hImage[i].color = c2;
+                hImage[i].enabled = false;
             }
         }
         for (int i = 0; i < lvlsText.Length; i++)
