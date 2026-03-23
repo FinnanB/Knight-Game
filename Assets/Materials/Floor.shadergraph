@@ -187,6 +187,7 @@
     "m_OutputNode": {
         "m_Id": ""
     },
+    "m_SubDatas": [],
     "m_ActiveTargets": [
         {
             "m_Id": "4ea62272353244f7994b2fa245d53ac7"
@@ -236,7 +237,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -285,7 +286,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "_offset",
     "m_StageCapability": 2,
-    "m_Value": 0.5,
+    "m_Value": 1.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -443,8 +444,8 @@
     "m_ShaderOutputName": "_tiling",
     "m_StageCapability": 2,
     "m_Value": {
-        "x": 1.0,
-        "y": 3.0
+        "x": 3.0,
+        "y": 6.0
     },
     "m_DefaultValue": {
         "x": 0.0,
@@ -457,6 +458,7 @@
     "m_SGVersion": 2,
     "m_Type": "UnityEditor.Rendering.BuiltIn.ShaderGraph.BuiltInTarget",
     "m_ObjectId": "4ea62272353244f7994b2fa245d53ac7",
+    "m_Datas": [],
     "m_ActiveSubTarget": {
         "m_Id": "d8d95f151c7f477fb6f7d16e951966d6"
     },
@@ -927,10 +929,10 @@
     },
     "m_Color": {
         "color": {
-            "r": 0.15094339847564698,
-            "g": 0.08154413104057312,
-            "b": 0.0,
-            "a": 0.0
+            "r": 0.2352941334247589,
+            "g": 0.14509804546833039,
+            "b": 0.09803922474384308,
+            "a": 1.0
         },
         "mode": 0
     }
@@ -1038,9 +1040,9 @@
     },
     "m_Color": {
         "color": {
-            "r": 0.15094339847564698,
-            "g": 0.15094339847564698,
-            "b": 0.15094339847564698,
+            "r": 0.38679248094558718,
+            "g": 0.36054396629333498,
+            "b": 0.3521271049976349,
             "a": 0.0
         },
         "mode": 0
@@ -1057,7 +1059,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "_width",
     "m_StageCapability": 2,
-    "m_Value": 0.6000000238418579,
+    "m_Value": 0.8999999761581421,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }

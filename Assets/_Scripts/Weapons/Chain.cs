@@ -22,7 +22,10 @@ public class Chain : MonoBehaviour
         {
             FillChain(length);
         }
-        ChainHitbox();
+        if (hitBox != null)
+        {
+            ChainHitbox();
+        }
     }
 
     void FillChain(int dist)

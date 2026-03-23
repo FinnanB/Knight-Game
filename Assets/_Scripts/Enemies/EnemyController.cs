@@ -34,6 +34,7 @@ public class EnemyController : MonoBehaviour
 
     public Vector3 startPos;
     Vector3 startEulerAngles;
+    public float rotateSpeed = 1.0f;
 
     float sturdyTime;
     public float sturdyResetTime;
@@ -177,6 +178,7 @@ public class EnemyController : MonoBehaviour
         if(seen)
         {
             destination = targetObject.position;
+            FacePlayer();
         }
         else
         {
@@ -190,6 +192,19 @@ public class EnemyController : MonoBehaviour
         }
         
         navAgent.SetDestination(destination);
+    }
+
+    void FacePlayer()
+    {
+        Vector3 targetDirection = targetObject.position - transform.position;
+        float singleStep = rotateSpeed * Time.deltaTime;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+        if (navAgent.stoppingDistance >= navAgent.remainingDistance)
+        {
+            transform.rotation = Quaternion.LookRotation(newDirection);
+            Debug.Log(targetDirection.normalized);
+            navAgent.Move(targetDirection.normalized * -1 * Time.deltaTime);
+        }
     }
 
     IEnumerator _Death()

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Walls
+  m_Name: Wood
   m_Shader: {fileID: -6465566751694194690, guid: 049cd2651620b214083296baa5560de5, type: 3}
   m_Parent: {fileID: -876546973899608171, guid: 049cd2651620b214083296baa5560de5, type: 3}
   m_ModifiedSerializedProperties: 0
@@ -26,16 +26,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
-    - _Grout_heigth: 0.99
-    - _Grout_width: 0.99
+    - _Grout_heigth: 1
+    - _Grout_width: 0.95
     m_Colors:
-    - _Brick_size: {r: 0.1, g: 0.1, b: 0, a: 0}
-    - _C1: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 0}
-    - _C2: {r: 0.24528301, g: 0.22792807, b: 0.22792807, a: 0}
-    - _Grout: {r: 0.64705884, g: 0.7372549, b: 0.63529414, a: 0}
+    - _Brick_size: {r: 0.2, g: 0.5, b: 0, a: 0}
+    - _C1: {r: 0.4433962, g: 0.19758257, b: 0.048104316, a: 0}
+    - _C2: {r: 0.2830189, g: 0.11710745, b: 0.0040049767, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &5157537746474496255
+--- !u!114 &7022741500808930415
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

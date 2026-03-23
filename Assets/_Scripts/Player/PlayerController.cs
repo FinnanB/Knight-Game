@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
         }
         playerData.weapon = 0;
         playerData.level = 0;
-        playerData.exp = 0;
+        playerData.exp = 30000;
         transform.position = Vector3.zero;
         playerData.spawnPoint = transform.position;
         SaveData();
@@ -307,7 +307,7 @@ public class PlayerController : MonoBehaviour
         if (stamina < 0)
         {
             stamina = 0;
-            stamRegen = 5f;
+            stamRegen = 10f;
         }
         else if (stamina < maxStam)
         {
@@ -316,7 +316,7 @@ public class PlayerController : MonoBehaviour
         else if (stamina >= maxStam)
         {
             stamina = maxStam;
-            stamRegen = 10f;
+            stamRegen = 20f;
         }
     }
 
