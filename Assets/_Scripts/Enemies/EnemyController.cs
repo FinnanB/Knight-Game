@@ -39,7 +39,7 @@ public class EnemyController : MonoBehaviour
     float sturdyTime;
     public float sturdyResetTime;
 
-    public void Hit(float dam, GameObject other, bool damageType)
+    public void Hit(float dam, GameObject other, bool damageType, float pierce)
     {
         targetObject = other.transform;
         seen = true;
@@ -47,13 +47,15 @@ public class EnemyController : MonoBehaviour
         float damageTaken;
         if (damageType)
         {
-            damageTaken = Mathf.Max(1, dam-armor);
+            damageTaken = Mathf.Max(1, dam-(armor*(10-pierce)/10));
+            
         }
         else
         {
             damageTaken = Mathf.Max(0, dam - armor);
         }
-        if(damageTaken == 0)
+        Debug.Log(damageTaken);
+        if (damageTaken == 0)
         {
             other.GetComponent<Animator>().SetTrigger("HitWrong");
         }
@@ -202,8 +204,9 @@ public class EnemyController : MonoBehaviour
         if (navAgent.stoppingDistance >= navAgent.remainingDistance)
         {
             transform.rotation = Quaternion.LookRotation(newDirection);
-            Debug.Log(targetDirection.normalized);
-            navAgent.Move(targetDirection.normalized * -1 * Time.deltaTime);
+            //Debug.Log(targetDirection.normalized);
+            Debug.DrawRay(transform.position, targetDirection, Color.green);
+            navAgent.Move(-targetDirection *0.5f* Time.deltaTime);
         }
     }
 

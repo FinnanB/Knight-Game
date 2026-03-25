@@ -4,59 +4,35 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.IO;
+using UnityEngine.AI;
 
 public class Test : MonoBehaviour
 {
-    public float h;
-    public float s;
-    public float d;
-    public float[] statLevel;
-
-    public float playerLevel;
-    public float xp;
-    private float levelCost;
-    public float totalSpent;
+    public Transform targetObject;
+    Rigidbody m_Rigidbody;
+    public float m_Thrust = 20f;
+    NavMeshAgent navAgent;
+    public bool close;
+    public float remDis;
 
     void Start()
     {
-        statLevel = new float[] { 1,1,1};
-        levelCost = 10;
-        playerLevel = 1;
-        totalSpent = 0;
+        close = false;
+        m_Rigidbody = GetComponent<Rigidbody>();
+        navAgent = GetComponent<NavMeshAgent>();
     }
 
    void Update()
     {
-
-        h = 180 + (20 * statLevel[0]);
-        s = 135 + (15 * statLevel[1]);
-        d = 3 + (2 * statLevel[2]);
-    }
-
-    public void LevelUp(int stat)
-    {
-        if (xp >= levelCost)
+        navAgent.destination = targetObject.position;
+        remDis = navAgent.remainingDistance;
+        Vector3 targetDirection = targetObject.position - transform.position;
+        //m_Rigidbody.AddForce(-targetDirection * m_Thrust);
+        if (navAgent.stoppingDistance >= navAgent.remainingDistance)
         {
-            playerLevel++;
-            statLevel[stat]++;
-            /*switch (stat)
-                {
-                case 0:
-                    h += 21 - statLevel[stat];
-                    break;
-                case 1:
-                    s += 16 - statLevel[stat];
-                    break;
-                case 2:
-                    d += 6 - statLevel[stat]/2;
-                    break;
-            }*/
-          //  Debug.Log(10 + (Mathf.Pow(1.1f, playerData.level)));
-           // playerData.maxHealth += playerData.maxHealth * 0.2f;
-           // playerData.damage += playerData.damage * 0.5f;
-            xp -= levelCost;
-            totalSpent += levelCost;
-            levelCost = 10 + (playerLevel * playerLevel);
+            close = true;
+            navAgent.Move(-targetDirection.normalized * Time.deltaTime);
         }
+            
     }
 }

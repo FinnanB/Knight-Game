@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public float maxStam;
     public float maxMana;
     public float strength;
+    public float pierce;
     public float dex;
     public int levelCost;
     public CharacterController controller;
@@ -209,8 +210,9 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
         stamina = maxStam;
         mana = maxMana;
-        strength = 30 + (10 * playerData.lvls[3]);
-        dex = 10 + (4 * playerData.lvls[4]);
+        strength = 18 + (7 * playerData.lvls[3]);
+        pierce = playerData.lvls[3];
+        dex = 15 + (6 * playerData.lvls[4]);
         heals = playerData.maxHeals;
         transform.position = playerData.spawnPoint;
     }

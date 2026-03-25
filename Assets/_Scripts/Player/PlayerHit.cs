@@ -37,9 +37,9 @@ public class PlayerHit : MonoBehaviour
         if (other.tag == "Enemy")
         {
           //  Debug.Log(other.gameObject);
-            other.GetComponent<EnemyController>().Hit(trueDamage, _Player, damageType);
+            other.GetComponent<EnemyController>().Hit(trueDamage, _Player, damageType, _Player.GetComponent<PlayerController>().pierce);
             _Player.GetComponent<PlayerController>().mana +=10;
-            m_MyAudioSource.Play();
+           // m_MyAudioSource.Play();
         }
         else if (other.tag != "Enemy" && !damageType && hitWall) 
         {
