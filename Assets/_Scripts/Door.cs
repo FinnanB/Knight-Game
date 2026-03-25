@@ -5,15 +5,17 @@ using UnityEngine.AI;
 
 public class Door : MonoBehaviour
 {
-    public bool isClosed;
+    public bool isOpen;
     public bool stayOpen;
     public bool inRange;
     public Collider _col;
     public GameObject _text;
+
+    public Animator c_Animator;
     // Start is called before the first frame update
     void Start()
     {
-        
+        c_Animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -21,22 +23,9 @@ public class Door : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && inRange)
         {
-            Open(false);
+            isOpen = true;
         }
-
-        if(!isClosed && !inRange && !stayOpen)
-        {
-            Open(true);
-        }
-    }
-
-    void Open(bool t)
-    {
-        //Debug.Log("h");
-        isClosed = t;
-        _col.enabled = t;
-        GetComponent<MeshRenderer>().enabled = t;
-        GetComponent<NavMeshObstacle>().carving = t;
+        c_Animator.SetBool("Open", isOpen);
     }
 
     void OnTriggerEnter(Collider other)
