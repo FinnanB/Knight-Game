@@ -968,8 +968,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5e0b0e17bb2654ea38aee07cbe3b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
-  maxHealth: 200
+  health: 100
+  maxHealth: 100
   maxSturdy: 5
   sturdy: 0
   c_Animator: {fileID: 2743152669886766565}
@@ -978,9 +978,9 @@ MonoBehaviour:
   isClose: 0
   targetObject: {fileID: 0}
   eyes: {fileID: 7563411303228068749}
-  armor: 20
+  armor: 10
   seen: 0
-  xp: 10
+  xp: 20
   startPos: {x: 0, y: 0, z: 0}
   rotateSpeed: 1
   sturdyResetTime: 0
@@ -997,7 +997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   c_Animator: {fileID: 2743152669886766565}
-  wTime: 1
+  wTime: 3
   canSwing: 0
   sw1: {fileID: 6715813437021280076}
 --- !u!4 &7563411303228068749 stripped

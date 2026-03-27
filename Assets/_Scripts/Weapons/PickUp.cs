@@ -12,19 +12,47 @@ public class PickUp : MonoBehaviour
     public int attackNum;
     public Animator c_Animator;
 
+    public bool isOpen;
+    public bool inRange;
+
     public bool upgrade;
 
-    public TMP_Text hint;
-    public String hintText;
+    public GameObject _text;
+    public TMP_Text _InfoText;
+
+    public GameObject player;
+
+    public string hint;
 
     AudioSource m_MyAudioSource;
 
     void Start()
     {
         m_MyAudioSource = GetComponent<AudioSource>();
+        c_Animator = GetComponent<Animator>();
     }
 
-    void OnTriggerEnter(Collider other)
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && inRange && player != null)
+        {
+            isOpen = true;
+            m_MyAudioSource.Play();
+            if (!upgrade)
+            {
+                player.GetComponent<Sword>()._Tog[attackNum].gameObject.SetActive(true);
+                player.GetComponent<Sword>().SetData();
+                this.enabled = false;
+            }
+            else
+            {
+                player.GetComponent<Sword>().LevelUp();
+            }
+        }
+        c_Animator.SetBool("Open", isOpen);
+    }
+
+    /*void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
@@ -43,15 +71,28 @@ public class PickUp : MonoBehaviour
             c_Animator.SetTrigger("Open");
             
         }
+    }*/
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            inRange = true;
+            player = other.gameObject;
+            _text.SetActive(true);
+            _InfoText.enabled = true;
+            _InfoText.text = hint;
+        }
     }
 
-    IEnumerator _Hint()
+    void OnTriggerExit(Collider other)
     {
-        hint.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        hint.text = hintText;
-        yield return new WaitForSeconds(3f);
-        hint.text = "";
-        hint.gameObject.SetActive(false);
+        if (other.tag == "Player")
+        {
+            inRange = false;
+            _text.SetActive(false);
+            _InfoText.enabled = false;
+            _InfoText.text = "";
+        }
     }
 }

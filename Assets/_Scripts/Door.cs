@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class Door : MonoBehaviour
 {
     public bool isOpen;
-    public bool stayOpen;
     public bool inRange;
     public Collider _col;
     public GameObject _text;

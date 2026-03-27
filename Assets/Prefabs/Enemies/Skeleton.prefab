@@ -788,6 +788,8 @@ MonoBehaviour:
   seen: 0
   xp: 2
   startPos: {x: 0, y: 0, z: 0}
+  rotateSpeed: 1
+  sturdyResetTime: 0
 --- !u!195 &809867643465284956
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -916,7 +918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   c_Animator: {fileID: 4730933630796287015}
-  wTime: 0
+  wTime: 7
   canSwing: 0
   sw1: {fileID: 2562155176999382318}
 --- !u!4 &2286934462487965228 stripped

@@ -616,9 +616,9 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftShift) && stamina > 0)
         {
             
-            stamina -= 30*Time.deltaTime;
+            stamina -= 15*Time.deltaTime;
             staminaRegening = false;
-            speed = 8;
+            speed = 12;
         }
         else
         {

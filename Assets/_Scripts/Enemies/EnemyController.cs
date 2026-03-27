@@ -205,8 +205,8 @@ public class EnemyController : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(newDirection);
             //Debug.Log(targetDirection.normalized);
-            Debug.DrawRay(transform.position, targetDirection, Color.green);
-            navAgent.Move(-targetDirection *0.5f* Time.deltaTime);
+            //Debug.DrawRay(transform.position, targetDirection, Color.green);
+           // navAgent.Move(-targetDirection *0.5f* Time.deltaTime);
         }
     }
 

@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 778467527139880307, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
+      propertyPath: m_Name
+      value: Reset
+      objectReference: {fileID: 0}
     - target: {fileID: 1706693420589152161, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -631,6 +635,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6302645133095727492, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
+      propertyPath: m_Name
+      value: Exit
+      objectReference: {fileID: 0}
     - target: {fileID: 7197131828807446011, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
       propertyPath: m_TargetGraphic
       value: 
@@ -713,7 +721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7197131828807446011, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
-      value: Beach
+      value: Forest
       objectReference: {fileID: 0}
     - target: {fileID: 7197131828807446011, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -817,7 +825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7925621271751084953, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Beach
+      value: Forest
       objectReference: {fileID: 0}
     - target: {fileID: 7925621271751084953, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1332,6 +1340,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4546619649629948168, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -143.14
+      objectReference: {fileID: 0}
     - target: {fileID: 5158700369569162909, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1355,6 +1367,10 @@ PrefabInstance:
     - target: {fileID: 5158700369569162909, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -221
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886456723831824349, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -138.5
       objectReference: {fileID: 0}
     - target: {fileID: 6937362368852034932, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1809,7 +1825,7 @@ Transform:
   m_GameObject: {fileID: 1587058398}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 92, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -121,11 +121,15 @@ PrefabInstance:
       objectReference: {fileID: 2373931528511320375}
     - target: {fileID: 1865769882405622639, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: armor
-      value: 10
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865769882405622639, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
+      propertyPath: health
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1865769882405622639, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: maxHealth
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1865769882405622639, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: c_Animator
@@ -133,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 6108467472358776393}
     - target: {fileID: 2261496266061188364, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: wTime
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2801948341157035161, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: m_IsActive
