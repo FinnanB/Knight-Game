@@ -39,6 +39,12 @@ public class EnemyController : MonoBehaviour
     float sturdyTime;
     public float sturdyResetTime;
 
+    public Vector3 tDir;
+    public bool canMove;
+    public float speed;
+
+    GameObject resetOb;
+
     public void Hit(float dam, GameObject other, bool damageType, float pierce)
     {
         targetObject = other.transform;
@@ -71,7 +77,7 @@ public class EnemyController : MonoBehaviour
 
     public void Reset()
     {
-        hasDied = false;
+        /*hasDied = false;
         c_Animator.SetTrigger("Reset");
         health = maxHealth;
         transform.position = startPos;
@@ -81,6 +87,10 @@ public class EnemyController : MonoBehaviour
         // Debug.Log(seen);
         destination = transform.position; 
         //Debug.Log(destination);
+        transform.eulerAngles = startEulerAngles;
+        Instantiate(gameObject, startPos, Quaternion.identity, transform.parent);*/
+        //resetOb.SetActive(true);
+        Destroy(gameObject);
     }
 
     IEnumerator _Fall()
@@ -180,7 +190,15 @@ public class EnemyController : MonoBehaviour
         if(seen)
         {
             destination = targetObject.position;
-            FacePlayer();
+            if(canMove)
+            {
+                FacePlayer();
+            }
+            else
+            {
+                c_Animator.SetFloat("Move", 0);
+            }
+            
         }
         else
         {
@@ -194,20 +212,51 @@ public class EnemyController : MonoBehaviour
         }
         
         navAgent.SetDestination(destination);
+        
+    }
+
+    Vector3 relative;
+
+    void MoveAnim()
+    {
+        //Vector3 relative = transform.InverseTransformDirection(navAgent.velocity);
+        relative = relative.normalized;
+        //Debug.Log(relative);
+        if(relative.z >= 0.1f || relative.z <= -0.1f)
+        {
+            c_Animator.SetFloat("Move", relative.z);
+        }
+        else
+        {
+            c_Animator.SetFloat("Move", 0);
+        }
+        
     }
 
     void FacePlayer()
     {
         Vector3 targetDirection = targetObject.position - transform.position;
+        tDir = targetDirection.normalized * -5 * Time.deltaTime; ;
         float singleStep = rotateSpeed * Time.deltaTime;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
-        if (navAgent.stoppingDistance >= navAgent.remainingDistance)
+        float angle = Vector3.Angle(targetDirection, transform.forward);
+        if (navAgent.stoppingDistance >= navAgent.remainingDistance && angle >= 2)
         {
             transform.rotation = Quaternion.LookRotation(newDirection);
-            //Debug.Log(targetDirection.normalized);
-            //Debug.DrawRay(transform.position, targetDirection, Color.green);
-           // navAgent.Move(-targetDirection *0.5f* Time.deltaTime);
+            
+            //Debug.Log(angle);
+            Debug.DrawRay(transform.position, targetDirection, Color.green);
         }
+        if (navAgent.stoppingDistance >= navAgent.remainingDistance + 1 && angle <=25)
+        {
+            navAgent.Move(tDir);
+            relative = transform.InverseTransformDirection(tDir);
+        }
+        else 
+        {
+            relative = transform.InverseTransformDirection(navAgent.velocity);
+        }
+        MoveAnim();
     }
 
     IEnumerator _Death()
@@ -218,6 +267,7 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForEndOfFrame();
         c_Animator.SetBool("Died", false);
         yield return new WaitForSeconds(1.25f);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        //gameObject.SetActive(false);
     }
 }

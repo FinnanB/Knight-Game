@@ -124,6 +124,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1865769882405622639, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
+      propertyPath: speed
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865769882405622639, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: health
       value: 50
       objectReference: {fileID: 0}
@@ -135,6 +139,10 @@ PrefabInstance:
       propertyPath: c_Animator
       value: 
       objectReference: {fileID: 6108467472358776393}
+    - target: {fileID: 1865769882405622639, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
+      propertyPath: rotateSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2261496266061188364, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: wTime
       value: 5
@@ -189,7 +197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5486698189909387899, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: m_StoppingDistance
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5618019190302733650, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: m_IsActive

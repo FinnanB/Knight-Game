@@ -404,3 +404,4 @@ MonoBehaviour:
   mInput: {fileID: 0}
   enemies: []
   player: {fileID: 0}
+  reset: 0

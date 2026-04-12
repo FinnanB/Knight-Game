@@ -28,8 +28,8 @@ public class Sword : MonoBehaviour
     public bool changed;
 
     public List<string> _Attacks = new List<string>();
-    public int[] ints = new int[3];
-    public Toggle[] _Tog = new Toggle[3];
+    public int[] ints = new int[2];
+    public Toggle[] _Tog = new Toggle[2];
     public int currentMoves;
     public int totalMoves;
 
@@ -41,6 +41,8 @@ public class Sword : MonoBehaviour
 
     public bool run;
     public TMP_Text moveCount;
+
+    public GameObject modeImage1, modeImage2;
 
     string filePath;
     const string FILE_NAME = "WeaponStatus.json";
@@ -136,8 +138,10 @@ public class Sword : MonoBehaviour
 
 
 
-    void Update()
+    public void Update()
     {
+        modeImage1.SetActive(wMode);
+        modeImage2.SetActive(!wMode);
         c_Animator.SetBool("Switch", wMode);
         totalMoves = swordData.level;
         moveCount.text = "Attacks: " + currentMoves + "/" + totalMoves;
@@ -158,10 +162,13 @@ public class Sword : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1) && GetComponent<PlayerController>().stamina >= swingCost*2 && GetComponent<PlayerController>().mana >= swingCost * 2 && swing)
         {
-            GetComponent<PlayerController>().stamina -= swingCost;
-            GetComponent<PlayerController>().mana -= swingCost;
-            c_Animator.SetTrigger("Heavy");
-            StartCoroutine(PlayAnimation());
+            if ((swordData.selected[0] && !wMode) || (swordData.selected[1]&&wMode))
+            {
+                GetComponent<PlayerController>().stamina -= swingCost;
+                GetComponent<PlayerController>().mana -= swingCost;
+                c_Animator.SetTrigger("Heavy");
+                StartCoroutine(PlayAnimation());
+            }
         }
         if (Input.GetKeyDown("r"))
         {

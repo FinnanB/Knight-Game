@@ -11,6 +11,7 @@ public class SceneController : MonoBehaviour
     public GameObject mInput;
 
     public GameObject[] enemies;
+    public GameObject[] enemiesReset;
     GameObject arrows;
     public GameObject player;
 
@@ -19,6 +20,7 @@ public class SceneController : MonoBehaviour
     void Start()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        NewEnemies();
         player = GameObject.FindWithTag("Player");
         /*if(reset)
         {
@@ -27,6 +29,16 @@ public class SceneController : MonoBehaviour
             player.GetComponent<Sword>().ResetData();
         }*/
         inRange = false;
+    }
+
+    void NewEnemies()
+    {
+        enemiesReset = new GameObject[enemies.Length];
+        for(int i = 0; i < enemies.Length; i++)
+        {
+            enemiesReset[i] = Instantiate(enemies[i], enemies[i].transform.position, Quaternion.identity, enemies[i].transform.parent);
+            enemiesReset[i].SetActive(false);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -53,11 +65,14 @@ public class SceneController : MonoBehaviour
         // mInput.SetActive(false);
         pause.SetActive(true);
         Time.timeScale = 0;
-        foreach(GameObject enemy in enemies)
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for(int i = 0; i < enemies.Length; i++)
         {
-            enemy.SetActive(true);
-            enemy.GetComponent<EnemyController>().Reset();
+            Destroy(enemies[i]);
+            enemies[i] = enemiesReset[i];
+            enemies[i].SetActive(true);
         }
+        NewEnemies();
         player.GetComponent<PlayerController>().SetPosition();
         player.GetComponent<Sword>().swing = false;
         player.GetComponent<PlayerController>().Reset();

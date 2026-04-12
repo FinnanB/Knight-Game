@@ -12,7 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _SUNDISK_SIMPLE
+  - _SUNDISK_HIGH_QUALITY
   m_InvalidKeywords:
   - _MAPPING_LATITUDE_LONGITUDE_LAYOUT
   m_LightmapFlags: 4
@@ -27,11 +27,11 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _AtmosphereThickness: 0.5
-    - _Exposure: 0.46
-    - _SunDisk: 1
-    - _SunSize: 0.04
-    - _SunSizeConvergence: 5
+    - _AtmosphereThickness: 0.91
+    - _Exposure: 0.2
+    - _SunDisk: 2
+    - _SunSize: 0.455
+    - _SunSizeConvergence: 1
     m_Colors:
     - _GroundColor: {r: 0.36899996, g: 0.34899998, b: 0.34099993, a: 1}
     - _SkyTint: {r: 0.057678655, g: 0, b: 0.6320754, a: 1}

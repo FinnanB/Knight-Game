@@ -5,34 +5,15 @@ using UnityEngine.UI;
 using System;
 using System.IO;
 using UnityEngine.AI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
-public class Test : MonoBehaviour
+public class Test : Selectable
 {
-    public Transform targetObject;
-    Rigidbody m_Rigidbody;
-    public float m_Thrust = 20f;
-    NavMeshAgent navAgent;
-    public bool close;
-    public float remDis;
+    public GameObject image1;
 
-    void Start()
+    void Update()
     {
-        close = false;
-        m_Rigidbody = GetComponent<Rigidbody>();
-        navAgent = GetComponent<NavMeshAgent>();
-    }
-
-   void Update()
-    {
-        navAgent.destination = targetObject.position;
-        remDis = navAgent.remainingDistance;
-        Vector3 targetDirection = targetObject.position - transform.position;
-        //m_Rigidbody.AddForce(-targetDirection * m_Thrust);
-        if (navAgent.stoppingDistance >= navAgent.remainingDistance)
-        {
-            close = true;
-            navAgent.Move(-targetDirection.normalized * Time.deltaTime);
-        }
-            
+        image1.SetActive(IsHighlighted());
     }
 }

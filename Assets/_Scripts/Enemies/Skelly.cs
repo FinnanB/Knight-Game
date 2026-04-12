@@ -12,6 +12,8 @@ public class Skelly : MonoBehaviour
     public Animator c_Animator;
     public float wTime;
     public bool canSwing;
+
+    NavMeshAgent navAgent;
     // Start is called before the first frame update
 
     // Update is called once per frame
@@ -21,6 +23,19 @@ public class Skelly : MonoBehaviour
     private void Start()
     {
         canSwing = true;
+        navAgent = GetComponent<NavMeshAgent>();
+    }
+
+    void Update()
+    {
+        if(canSwing)
+        {
+            navAgent.stoppingDistance = 5;
+        }
+        else
+        {
+            navAgent.stoppingDistance = 12;
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -39,15 +54,18 @@ public class Skelly : MonoBehaviour
         AnimatorStateInfo stateInfo = c_Animator.GetCurrentAnimatorStateInfo(0);
         int cur = stateInfo.shortNameHash;
         canSwing = false;
-       /* yield return new WaitUntil(() => c_Animator.GetCurrentAnimatorStateInfo(0).shortNameHash != cur);
-        stateInfo = c_Animator.GetCurrentAnimatorStateInfo(0);
-        GetComponent<NavMeshAgent>().speed = 0;
-        sw1.enabled = true;
+        GetComponent<EnemyController>().canMove = false;
+        yield return new WaitUntil(() => c_Animator.GetCurrentAnimatorStateInfo(0).shortNameHash != cur);
+       // stateInfo = c_Animator.GetCurrentAnimatorStateInfo(0);
+       // GetComponent<NavMeshAgent>().speed = 0;
+       // sw1.enabled = true;
         yield return new WaitForSeconds(stateInfo.length);
-        GetComponent<NavMeshAgent>().speed = 5;
-        sw1.enabled = false;*/
+        GetComponent<EnemyController>().canMove = true;
+        // GetComponent<NavMeshAgent>().speed = 5;
+        //sw1.enabled = false;
         yield return new WaitForSeconds(wTime);
         canSwing = true;
+        
         yield return null;
     }
 }

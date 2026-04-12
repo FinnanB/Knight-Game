@@ -217,6 +217,7 @@
     "m_OutputNode": {
         "m_Id": ""
     },
+    "m_SubDatas": [],
     "m_ActiveTargets": [
         {
             "m_Id": "7dae97a63dc74b94bc2677a7ceff692e"
@@ -807,6 +808,7 @@
     "m_SGVersion": 2,
     "m_Type": "UnityEditor.Rendering.BuiltIn.ShaderGraph.BuiltInTarget",
     "m_ObjectId": "7dae97a63dc74b94bc2677a7ceff692e",
+    "m_Datas": [],
     "m_ActiveSubTarget": {
         "m_Id": "3b24506e3d9f420cab8e555f5c480b90"
     },

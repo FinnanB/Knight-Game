@@ -432,7 +432,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator _Dodge(Vector3 dir)
     {
         //StopAllCoroutines();
-        
+        GetComponent<Sword>().swing = false;
         stamina -= dodgeCost;
         staminaRegening = false;
         canMove = false;
@@ -455,6 +455,7 @@ public class PlayerController : MonoBehaviour
             a += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        GetComponent<Sword>().swing = true;
         canMove = true;
         staminaRegening = true;
         yield return null;
