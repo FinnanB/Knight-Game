@@ -864,7 +864,7 @@ CharacterController:
   m_Height: 4.5
   m_Radius: 0.75
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.5
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.4, z: 0}
@@ -899,6 +899,8 @@ MonoBehaviour:
   lvl: 0
   run: 0
   moveCount: {fileID: 0}
+  modeImage1: {fileID: 0}
+  modeImage2: {fileID: 0}
 --- !u!136 &3966825388879765748
 CapsuleCollider:
   m_ObjectHideFlags: 0

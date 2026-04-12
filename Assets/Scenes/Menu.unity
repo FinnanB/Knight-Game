@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 238026130917806172, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 446929350612779501, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -770,6 +774,10 @@ PrefabInstance:
     - target: {fileID: 7584462093235535409, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721290627946796776, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7925621271751084953, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
       propertyPath: m_TargetGraphic
