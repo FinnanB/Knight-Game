@@ -11,6 +11,13 @@ public class Chain : MonoBehaviour
     List<GameObject> chain = new List<GameObject>();
     int length;
 
+    AudioSource m_MyAudioSource;
+
+    private void Start()
+    {
+        m_MyAudioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         transform.LookAt(target, Vector3.up);
@@ -55,6 +62,10 @@ public class Chain : MonoBehaviour
         CapsuleCollider hit = hitBox.GetComponent<CapsuleCollider>();
         if (chain.Count != 0)
         {
+            if (m_MyAudioSource != null)
+            {
+                m_MyAudioSource.UnPause();
+            }
             hit.enabled = true;
             Vector3 newPos = chain[chain.Count/2].transform.position;
             hitBox.transform.position = newPos;
@@ -62,6 +73,10 @@ public class Chain : MonoBehaviour
         }
         else if(chain.Count == 0)
         {
+            if (m_MyAudioSource != null)
+            {
+                m_MyAudioSource.Pause();
+            }
             hit.enabled = false;
         }
     }

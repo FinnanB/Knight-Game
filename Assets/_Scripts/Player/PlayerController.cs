@@ -116,6 +116,9 @@ public class PlayerController : MonoBehaviour
 
     float sturdyTime;
     public float sturdyResetTime;
+
+    AudioSource m_MyAudioSource;
+    public AudioClip[] audioClips;
     public static PlayerController Instance { get; private set; }
 
     void Awake()
@@ -132,6 +135,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        m_MyAudioSource = GetComponent<AudioSource>();
         sturdyTime = 0;
         layerIndex = c_Animator.GetLayerIndex("Walk");
         levelCost = 10 + (playerData.level * playerData.level);
@@ -408,29 +412,40 @@ public class PlayerController : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0f, cam.eulerAngles.y, 0f);
 
+        
+        if (direction.magnitude >= 0.1f)
+        {
+            staminaRegening = false;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            m_MyAudioSource.clip = audioClips[1];
+            if (!m_MyAudioSource.isPlaying)
+            {
+                m_MyAudioSource.Play();
+            }
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            controller.Move(moveDir.normalized * (speed + direction.z) * Time.deltaTime);
+        }
+        else
+        {
+            if(m_MyAudioSource.clip == audioClips[1])
+            {
+                m_MyAudioSource.Stop();
+            }
+            
+            staminaRegening = true;
+        }
         if (Input.GetKeyDown(KeyCode.Space) && stamina >= dodgeCost)
         {
             StopAllCoroutines();
             StartCoroutine(_Dodge(direction));
             //dodge = true;
         }
-        if (direction.magnitude >= 0.1f)
-        {
-            staminaRegening = false;
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * (speed + direction.z) * Time.deltaTime);
-        }
-        else
-        {
-            staminaRegening = true;
-        }
     }
 
     IEnumerator _Dodge(Vector3 dir)
     {
+
         //StopAllCoroutines();
         GetComponent<Sword>().swing = false;
         stamina -= dodgeCost;
@@ -446,6 +461,8 @@ public class PlayerController : MonoBehaviour
         float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         Vector3 target = transform.position + dir*10;
+        m_MyAudioSource.clip = audioClips[2];
+        m_MyAudioSource.Play();
         //Debug.Log(target);
         float a = 0;
         while (a < 1f)
@@ -455,6 +472,7 @@ public class PlayerController : MonoBehaviour
             a += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        m_MyAudioSource.Stop();
         GetComponent<Sword>().swing = true;
         canMove = true;
         staminaRegening = true;

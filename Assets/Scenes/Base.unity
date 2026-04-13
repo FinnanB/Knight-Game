@@ -195,7 +195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &150665498
 Transform:
   m_ObjectHideFlags: 0
@@ -1587,7 +1587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1510678856435102870, guid: 544c0857bb20dd146856213db02ab32f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1511634670935302065, guid: 544c0857bb20dd146856213db02ab32f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -4802,6 +4802,10 @@ PrefabInstance:
       propertyPath: sturdyResetTime
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1657310815948860954, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
+      propertyPath: 'audioClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: e2fa50f76bd59814f98a2750a85c924c, type: 3}
     - target: {fileID: 1702269486337776928, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5017,6 +5021,14 @@ PrefabInstance:
     - target: {fileID: 3216051302610668551, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -167.88205
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685540459846033780, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685540459846033780, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3830750554891400482, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5437,6 +5449,18 @@ PrefabInstance:
     - target: {fileID: 6223661741439231614, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -2.862403
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400387209224388744, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 9e77cd8e72d278243b6bdf15722cc4f6, type: 3}
+    - target: {fileID: 6400387209224388744, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9e77cd8e72d278243b6bdf15722cc4f6, type: 3}
+    - target: {fileID: 6400387209224388744, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6446983912139314470, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
