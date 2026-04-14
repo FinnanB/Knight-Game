@@ -8,6 +8,7 @@ public class SceneController : MonoBehaviour
     public bool inRange;
     public GameObject _text;
     public GameObject pause;
+    public GameObject fullPause;
     public GameObject mInput;
 
     public GameObject[] enemies;
@@ -62,22 +63,29 @@ public class SceneController : MonoBehaviour
     public void Pause()
     {
         Cursor.lockState = CursorLockMode.None;
-        // mInput.SetActive(false);
         pause.SetActive(true);
-        Time.timeScale = 0;
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        for(int i = 0; i < enemies.Length; i++)
+        if (inRange)
         {
-            Destroy(enemies[i]);
-            enemies[i] = enemiesReset[i];
-            enemies[i].SetActive(true);
+            fullPause.SetActive(true);
+            Time.timeScale = 0;
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                Destroy(enemies[i]);
+                enemies[i] = enemiesReset[i];
+                enemies[i].SetActive(true);
+            }
+            NewEnemies();
+            player.GetComponent<PlayerController>().SetPosition();
+            player.GetComponent<Sword>().swing = false;
+            player.GetComponent<PlayerController>().Reset();
         }
-        NewEnemies();
-        player.GetComponent<PlayerController>().SetPosition();
-        player.GetComponent<Sword>().swing = false;
-        player.GetComponent<PlayerController>().Reset();
+        // mInput.SetActive(false);
+        
        // player.GetComponent<Bow>().arrows = player.GetComponent<Bow>().maxArrows;
     }
+
+
 
     public void UnPause()
     {
@@ -85,6 +93,7 @@ public class SceneController : MonoBehaviour
         player.GetComponent<Sword>().swing = true;
         Time.timeScale = 1;
         pause.SetActive(false);
+        fullPause.SetActive(false);
        // mInput.SetActive(true);
     }
 
@@ -113,7 +122,7 @@ public class SceneController : MonoBehaviour
     void Update()
     {
         Reset();
-        if (Input.GetKeyDown(KeyCode.Escape) && inRange)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Pause();
         }
