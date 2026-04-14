@@ -8,12 +8,11 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class Test : Selectable
+public class Test : MonoBehaviour
 {
-    public GameObject image1;
 
     void Update()
     {
-        image1.SetActive(IsHighlighted());
+        transform.position += transform.InverseTransformDirection(Vector3.back) * Time.deltaTime;
     }
 }

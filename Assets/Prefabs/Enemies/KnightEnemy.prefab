@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_LocalPosition.x
@@ -788,6 +788,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9046556965432382260, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -887,9 +903,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
-  m_Height: 5
+  m_Height: 6
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!195 &5486698189909387899
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -909,7 +925,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 4.5
-  m_BaseOffset: 1.8
+  m_BaseOffset: 2.4
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!54 &7150440084373704574
@@ -991,6 +1007,7 @@ MonoBehaviour:
   tDir: {x: 0, y: 0, z: 0}
   canMove: 1
   speed: -5
+  a: 0
 --- !u!114 &2261496266061188364
 MonoBehaviour:
   m_ObjectHideFlags: 0

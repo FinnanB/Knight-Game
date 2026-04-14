@@ -233,10 +233,12 @@ public class EnemyController : MonoBehaviour
         
     }
 
+    public bool a;
+
     void FacePlayer()
     {
-        Vector3 targetDirection = targetObject.position - transform.position;
-        tDir = targetDirection.normalized * -5 * Time.deltaTime; ;
+        Vector3 targetDirection = new Vector3(targetObject.position.x - transform.position.x,0, targetObject.position.z - transform.position.z);
+        tDir = transform.TransformDirection(Vector3.back) * 5 * Time.deltaTime; 
         float singleStep = rotateSpeed * Time.deltaTime;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
         float angle = Vector3.Angle(targetDirection, transform.forward);
@@ -249,11 +251,13 @@ public class EnemyController : MonoBehaviour
         }
         if (navAgent.stoppingDistance >= navAgent.remainingDistance + 1 && angle <=25)
         {
+            a = true;
             navAgent.Move(tDir);
             relative = transform.InverseTransformDirection(tDir);
         }
         else 
         {
+            a = false;
             relative = transform.InverseTransformDirection(navAgent.velocity);
         }
         MoveAnim();
