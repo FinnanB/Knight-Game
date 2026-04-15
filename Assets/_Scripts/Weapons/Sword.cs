@@ -88,8 +88,8 @@ public class Sword : MonoBehaviour
     public void ResetData()
     {
         swordData.level = 1;
-        swordData.unlocked = new bool[3];
-        swordData.selected = new bool[3];
+        swordData.unlocked = new bool[2];
+        swordData.selected = new bool[2];
         for (int i = 0; i < swordData.unlocked.Length; i++)
         {
             swordData.unlocked[i] = false;
@@ -162,6 +162,7 @@ public class Sword : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1) && GetComponent<PlayerController>().stamina >= swingCost*2 && GetComponent<PlayerController>().mana >= swingCost * 2 && swing)
         {
+            Debug.Log(swordData.selected[0]);
             if ((swordData.selected[0] && !wMode) || (swordData.selected[1]&&wMode))
             {
                 GetComponent<PlayerController>().stamina -= swingCost;

@@ -34,7 +34,7 @@ public class PickUp : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && inRange && player != null)
+        if (Input.GetKeyDown(KeyCode.Q) && inRange && player != null)
         {
             isOpen = true;
             m_MyAudioSource.Play();

@@ -37,7 +37,7 @@ public class PlayerHit : MonoBehaviour
         if (other.tag == "Enemy")
         {
           //  Debug.Log(other.gameObject);
-            other.GetComponent<EnemyController>().Hit(trueDamage, _Player, damageType, _Player.GetComponent<PlayerController>().pierce);
+            other.GetComponent<EnemyController>().Hit(trueDamage, _Player, damageType, _Player.GetComponent<PlayerController>().pierce, transform.position);
             _Player.GetComponent<PlayerController>().mana +=10;
             if(m_MyAudioSource != null)
             {  

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EnemyController : MonoBehaviour
 {
@@ -45,7 +44,9 @@ public class EnemyController : MonoBehaviour
 
     GameObject resetOb;
 
-    public void Hit(float dam, GameObject other, bool damageType, float pierce)
+    int layerIndex;
+
+    public void Hit(float dam, GameObject other, bool damageType, float pierce, Vector3 dir)
     {
         targetObject = other.transform;
         seen = true;
@@ -60,7 +61,7 @@ public class EnemyController : MonoBehaviour
         {
             damageTaken = Mathf.Max(0, dam - armor);
         }
-        Debug.Log(damageTaken);
+        //Debug.Log(damageTaken);
         if (damageTaken == 0)
         {
             other.GetComponent<Animator>().SetTrigger("HitWrong");
@@ -72,7 +73,14 @@ public class EnemyController : MonoBehaviour
             sturdyTime = 0;
         }
         sturdy += sturDam;
-        StartCoroutine(_Fall());
+        if (sturDam >= maxSturdy / 3 && sturdy < maxSturdy)
+        {
+            c_Animator.SetTrigger("Stumble");
+            StartCoroutine(_Stumble(dir));
+        }
+        
+       // Debug.Log(sturdyTime + " " + sturDam + " " + sturdy);
+        
     }
 
     public void Reset()
@@ -93,9 +101,34 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
 
+    IEnumerator _Stumble(Vector3 dir)
+    {
+        Debug.Log("a");
+        canMove = false;
+        float a = 0;
+        Vector3 moveDir = dir - transform.position;
+        //Debug.Log(moveDir);
+        while (a < 0.6f)
+        {
+            float step = Time.deltaTime * 1f;
+
+            navAgent.Move(moveDir * -step);
+            a += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        canMove = true;
+        yield return null;
+    }
+
     IEnumerator _Fall()
     {
-        yield return new WaitForSeconds(1.5f);
+        Debug.Log("b");
+        c_Animator.SetLayerWeight(layerIndex, 0);
+        canMove = false;
+        yield return new WaitForSeconds(1.8f);
+        Debug.Log("c");
+        c_Animator.SetLayerWeight(layerIndex, 1);
+        canMove = true;
         //sturdy = maxSturdy;
     }
 
@@ -118,6 +151,7 @@ public class EnemyController : MonoBehaviour
         {
            // Debug.Log(sturdy);
             c_Animator.SetTrigger("Fall");
+            StopAllCoroutines();
             StartCoroutine(_Fall());
             sturdy = 0;
         }
@@ -125,6 +159,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        layerIndex = c_Animator.GetLayerIndex("Move");
         sturdyTime = 0;
         startPos = transform.position;
         startEulerAngles = transform.eulerAngles;
@@ -190,13 +225,15 @@ public class EnemyController : MonoBehaviour
         if(seen)
         {
             destination = targetObject.position;
-            if(canMove)
+            if(canMove && !hasDied)
             {
+                c_Animator.SetLayerWeight(layerIndex, 1);
                 FacePlayer();
             }
             else
             {
                 c_Animator.SetFloat("Move", 0);
+                c_Animator.SetLayerWeight(layerIndex, 0);
             }
             
         }
@@ -238,7 +275,7 @@ public class EnemyController : MonoBehaviour
     void FacePlayer()
     {
         Vector3 targetDirection = new Vector3(targetObject.position.x - transform.position.x,0, targetObject.position.z - transform.position.z);
-        tDir = transform.TransformDirection(Vector3.back) * 5 * Time.deltaTime; 
+        tDir = transform.TransformDirection(Vector3.back) * speed * Time.deltaTime; 
         float singleStep = rotateSpeed * Time.deltaTime;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
         float angle = Vector3.Angle(targetDirection, transform.forward);
@@ -265,6 +302,8 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator _Death()
     {
+        canMove = false;
+        c_Animator.SetLayerWeight(layerIndex, 0);
         hasDied = true;
         targetObject.GetComponent<PlayerController>().playerData.exp += xp;
         c_Animator.SetBool("Died", true);

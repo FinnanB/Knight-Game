@@ -1003,7 +1003,7 @@ MonoBehaviour:
   xp: 20
   startPos: {x: 0, y: 0, z: 0}
   rotateSpeed: 3
-  sturdyResetTime: 0
+  sturdyResetTime: 3
   tDir: {x: 0, y: 0, z: 0}
   canMove: 1
   speed: -5

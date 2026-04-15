@@ -6,9 +6,6 @@ using Cinemachine;
 using System;
 using System.IO;
 using TMPro;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
-using UnityEngine.Rendering;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public struct PlayerStatus
 {
@@ -192,7 +189,7 @@ public class PlayerController : MonoBehaviour
         }
         playerData.weapon = 0;
         playerData.level = 0;
-        playerData.exp = 30000;
+        playerData.exp = 0;
         transform.position = Vector3.zero;
         playerData.spawnPoint = transform.position;
         SaveData();
@@ -241,7 +238,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         if (heals > 0)
         {
-            health += 30;
+            health += 100;
             
             heals--;
         }
