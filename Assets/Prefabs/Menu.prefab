@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 6394957596360564544}
   - component: {fileID: 6639445429297357063}
   m_Layer: 5
-  m_Name: Showcase (2)
+  m_Name: 'Spin Showcase '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4916,7 +4916,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6773395305345266397}
   - component: {fileID: 8982336538707284655}
-  - component: {fileID: 3561611608843838891}
+  - component: {fileID: 1935746710421066356}
   m_Layer: 5
   m_Name: OverHead
   m_TagString: Untagged
@@ -4995,7 +4995,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!114 &3561611608843838891
+--- !u!114 &1935746710421066356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5004,7 +5004,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1816571727528558617}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b4e10e48af916643ae4a03e9386aa64, type: 3}
+  m_Script: {fileID: 11500000, guid: e9477a611586fa441994c2beb04e7dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1880585748691477165
@@ -18944,7 +18944,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6632334529535024632}
   - component: {fileID: 1014054272318323774}
-  - component: {fileID: 7914907362321372124}
+  - component: {fileID: 2875462681197641091}
   m_Layer: 5
   m_Name: Spin
   m_TagString: Untagged
@@ -19021,7 +19021,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!114 &7914907362321372124
+--- !u!114 &2875462681197641091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19030,7 +19030,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7408207552606469729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b4e10e48af916643ae4a03e9386aa64, type: 3}
+  m_Script: {fileID: 11500000, guid: e9477a611586fa441994c2beb04e7dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7480326063778294851
@@ -19354,7 +19354,7 @@ GameObject:
   - component: {fileID: 2060153196000391790}
   - component: {fileID: 6890418768897016297}
   m_Layer: 5
-  m_Name: Showcase (3)
+  m_Name: Overhead Showcase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
