@@ -990,7 +990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
-  maxSturdy: 5
+  maxSturdy: 15
   sturdy: 0
   c_Animator: {fileID: 2743152669886766565}
   destination: {x: 0, y: 0, z: 0}
@@ -998,7 +998,7 @@ MonoBehaviour:
   isClose: 0
   targetObject: {fileID: 0}
   eyes: {fileID: 7563411303228068749}
-  armor: 10
+  armor: 20
   seen: 0
   xp: 20
   startPos: {x: 0, y: 0, z: 0}
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   sturdyResetTime: 3
   tDir: {x: 0, y: 0, z: 0}
   canMove: 1
-  speed: -5
+  speed: 5
   a: 0
 --- !u!114 &2261496266061188364
 MonoBehaviour:
@@ -1021,7 +1021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   c_Animator: {fileID: 2743152669886766565}
-  wTime: 3
+  wTime: 2
   canSwing: 0
   sw1: {fileID: 6715813437021280076}
 --- !u!4 &7563411303228068749 stripped

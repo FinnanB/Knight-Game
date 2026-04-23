@@ -2315,7 +2315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6414526963150875460, guid: ba4dc3b343863a34a88f0d27b7331d73, type: 3}
       propertyPath: m_text
-      value: Health
+      value: Stamina
       objectReference: {fileID: 0}
     - target: {fileID: 6414526963150875460, guid: ba4dc3b343863a34a88f0d27b7331d73, type: 3}
       propertyPath: m_fontSize
@@ -2547,7 +2547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6414526963150875460, guid: ba4dc3b343863a34a88f0d27b7331d73, type: 3}
       propertyPath: m_text
-      value: Health
+      value: Mana
       objectReference: {fileID: 0}
     - target: {fileID: 6414526963150875460, guid: ba4dc3b343863a34a88f0d27b7331d73, type: 3}
       propertyPath: m_fontSize

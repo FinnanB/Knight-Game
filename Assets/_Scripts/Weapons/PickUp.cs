@@ -30,24 +30,39 @@ public class PickUp : MonoBehaviour
     {
         m_MyAudioSource = GetComponent<AudioSource>();
         c_Animator = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player");
+       /* if(player.GetComponent<Sword>().swordData.level == 2)
+        {
+            Debug.Log(gameObject);
+            isOpen = true;
+        }*/
+        if(!upgrade)
+        {
+            
+            isOpen = player.GetComponent<Sword>().swordData.unlocked[attackNum];
+        }
     }
 
     void Update()
     {
+        //Debug.Log(player.GetComponent<Sword>().swordData.unlocked[attackNum]);
         if (Input.GetKeyDown(KeyCode.Q) && inRange && player != null)
         {
             isOpen = true;
             m_MyAudioSource.Play();
             if (!upgrade)
             {
+                Debug.Log("f ");
                 player.GetComponent<Sword>()._Tog[attackNum].gameObject.SetActive(true);
-                player.GetComponent<Sword>().SetData();
+                player.GetComponent<Sword>().SetData(2);
+                Debug.Log("g ");
                 this.enabled = false;
             }
             else
             {
                 player.GetComponent<Sword>().LevelUp();
             }
+            _InfoText.text = hint;
         }
         c_Animator.SetBool("Open", isOpen);
     }
@@ -78,10 +93,10 @@ public class PickUp : MonoBehaviour
         if (other.tag == "Player")
         {
             inRange = true;
-            player = other.gameObject;
+            //player = other.gameObject;
             _text.SetActive(true);
             _InfoText.enabled = true;
-            _InfoText.text = hint;
+            
         }
     }
 

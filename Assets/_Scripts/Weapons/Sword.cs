@@ -33,6 +33,8 @@ public class Sword : MonoBehaviour
     public int currentMoves;
     public int totalMoves;
 
+    public bool[] _unlocked;
+
     public Collider sw1;
     public Collider sw2;
     public Collider sw3;
@@ -83,6 +85,7 @@ public class Sword : MonoBehaviour
         }
         //ResetData();
         LoadData();
+        _unlocked = swordData.unlocked;
     }
 
     public void ResetData()
@@ -96,6 +99,9 @@ public class Sword : MonoBehaviour
             swordData.selected[i] = false;
         }
         SaveData();
+       // Debug.Log("b " + swordData.unlocked[0]);
+        LoadData();
+       // Debug.Log("c " + swordData.unlocked[0]);
     }
 
     public void LoadData()
@@ -115,16 +121,19 @@ public class Sword : MonoBehaviour
             _Tog[i].isOn = swordData.selected[i];
             _Tog[i].gameObject.SetActive(swordData.unlocked[i]);
         }
+       // Debug.Log("a " + swordData.unlocked[0]);
     }
 
-    public void SetData()
+    public void SetData(int a)
     {
-
+       // Debug.Log(a);
+       // Debug.Log("d " + swordData.unlocked[0]);
         for (int i = 0; i < _Tog.Length; i++)
         {
             swordData.selected[i] = _Tog[i].isOn;
-            swordData.unlocked[i] = _Tog[i].gameObject.activeInHierarchy;
+            swordData.unlocked[i] = _Tog[i].gameObject.activeSelf;
         }
+      //  Debug.Log("e " + swordData.unlocked[0]);
         SaveData();
     }
 
@@ -140,6 +149,9 @@ public class Sword : MonoBehaviour
 
     public void Update()
     {
+        
+        lvl = swordData.level;
+        _unlocked[0] = swordData.unlocked[0];
         modeImage1.SetActive(wMode);
         modeImage2.SetActive(!wMode);
         c_Animator.SetBool("Switch", wMode);
@@ -162,7 +174,7 @@ public class Sword : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1) && GetComponent<PlayerController>().stamina >= swingCost*2 && GetComponent<PlayerController>().mana >= swingCost * 2 && swing)
         {
-            Debug.Log(swordData.selected[0]);
+           // Debug.Log(swordData.selected[0]);
             if ((swordData.selected[0] && !wMode) || (swordData.selected[1]&&wMode))
             {
                 GetComponent<PlayerController>().stamina -= swingCost;

@@ -223,6 +223,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1816571727528558617, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2009231745610081026, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -742,6 +746,10 @@ PrefabInstance:
     - target: {fileID: 7197131828807446011, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7408207552606469729, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7519043872302909422, guid: ec50c52ab6b57684aa5a154f1ab37530, type: 3}
       propertyPath: m_IsActive
@@ -1548,6 +1556,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6057118891973820477, guid: 469938b85e93217428ca3506da16ec70, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1593,6 +1605,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -77
       objectReference: {fileID: 0}
+    - target: {fileID: 2541460342928607982, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4172346924341258019, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.98287594
@@ -1632,6 +1648,10 @@ PrefabInstance:
     - target: {fileID: 5158700369569162909, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -221
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683319234755458198, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6886456723831824349, guid: 2a9469dabbcef7f468a7386ddbfc6e86, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2241,6 +2261,10 @@ PrefabInstance:
     - target: {fileID: 6057118891973820477, guid: 469938b85e93217428ca3506da16ec70, type: 3}
       propertyPath: m_Name
       value: Reset (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057118891973820477, guid: 469938b85e93217428ca3506da16ec70, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

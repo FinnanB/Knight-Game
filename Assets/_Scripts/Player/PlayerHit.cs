@@ -46,8 +46,8 @@ public class PlayerHit : MonoBehaviour
         }
         else if (other.tag != "Enemy" && !damageType && hitWall) 
         {
-            //Debug.Log(other.gameObject);
-            _Player.GetComponent<Animator>().SetTrigger("HitWrong");
+            Debug.Log(other.gameObject);
+            //_Player.GetComponent<Animator>().SetTrigger("HitWrong");
         }
     }
 }

@@ -1,7 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.UI;
+using Cinemachine;
+using System;
+using System.IO;
+using TMPro;
+
 
 public class Door : MonoBehaviour
 {
@@ -9,6 +14,7 @@ public class Door : MonoBehaviour
     public bool inRange;
     public Collider _col;
     public GameObject _text;
+
 
     public Animator c_Animator;
     // Start is called before the first frame update
@@ -20,7 +26,7 @@ public class Door : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && inRange)
+        if (Input.GetKeyDown(KeyCode.Q) && inRange)
         {
             isOpen = true;
         }

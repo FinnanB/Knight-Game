@@ -37,7 +37,7 @@ public class SceneController : MonoBehaviour
         enemiesReset = new GameObject[enemies.Length];
         for(int i = 0; i < enemies.Length; i++)
         {
-            enemiesReset[i] = Instantiate(enemies[i], enemies[i].transform.position, Quaternion.identity, enemies[i].transform.parent);
+            enemiesReset[i] = Instantiate(enemies[i], enemies[i].transform.position, enemies[i].transform.rotation, enemies[i].transform.parent);
             enemiesReset[i].SetActive(false);
         }
     }
@@ -68,10 +68,13 @@ public class SceneController : MonoBehaviour
         {
             fullPause.SetActive(true);
             Time.timeScale = 0;
-            enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            for (int i = 0; i < enemies.Length; i++)
+            //enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            for (int i = 0; i < enemiesReset.Length; i++)
             {
-                Destroy(enemies[i]);
+                if (enemies[i] != null)
+                {
+                    Destroy(enemies[i]);
+                }
                 enemies[i] = enemiesReset[i];
                 enemies[i].SetActive(true);
             }

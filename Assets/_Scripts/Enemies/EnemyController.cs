@@ -67,7 +67,7 @@ public class EnemyController : MonoBehaviour
             other.GetComponent<Animator>().SetTrigger("HitWrong");
         }
         health -= damageTaken;
-        float sturDam = damageTaken / 3;
+        float sturDam = damageTaken / 5;
         if (sturDam > 0)
         {
             sturdyTime = 0;
@@ -78,7 +78,7 @@ public class EnemyController : MonoBehaviour
             c_Animator.SetTrigger("Stumble");
             StartCoroutine(_Stumble(dir));
         }
-        
+        Debug.Log(damageTaken);
        // Debug.Log(sturdyTime + " " + sturDam + " " + sturdy);
         
     }
