@@ -16,7 +16,7 @@ public class ButtonHover : Selectable
     {
         if(image1 != null)
         {
-          //  image1.SetActive(IsHighlighted());
+            image1.SetActive(IsHighlighted());
         }
     }
 }
