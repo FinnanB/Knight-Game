@@ -15,6 +15,8 @@ public class Door : MonoBehaviour
     public Collider _col;
     public GameObject _text;
 
+    public int doorNum;
+    public GameObject sControll;
 
     public Animator c_Animator;
     // Start is called before the first frame update
@@ -29,6 +31,7 @@ public class Door : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && inRange)
         {
             isOpen = true;
+            sControll.GetComponent<SceneController>().SetData(doorNum);
         }
         c_Animator.SetBool("Open", isOpen);
     }

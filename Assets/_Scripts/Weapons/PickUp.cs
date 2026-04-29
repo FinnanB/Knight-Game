@@ -31,16 +31,33 @@ public class PickUp : MonoBehaviour
         m_MyAudioSource = GetComponent<AudioSource>();
         c_Animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
+        //Debug.Log(player);
+        StartCoroutine(DelayStart());
        /* if(player.GetComponent<Sword>().swordData.level == 2)
         {
             Debug.Log(gameObject);
             isOpen = true;
         }*/
-        if(!upgrade)
+        
+    }
+
+    IEnumerator DelayStart()
+    {
+        yield return new WaitForSeconds(0.1f);
+        //Debug.Log(player.GetComponent<Sword>().swordData.unlocked[attackNum]);
+        if (!upgrade)
         {
-            
+
             isOpen = player.GetComponent<Sword>().swordData.unlocked[attackNum];
         }
+        else if (upgrade)
+        {
+            if(player.GetComponent<Sword>().swordData.level == 2)
+            {
+                isOpen = true;
+            }
+        }
+        //return null;
     }
 
     void Update()
