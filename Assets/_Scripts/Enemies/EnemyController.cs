@@ -43,6 +43,11 @@ public class EnemyController : MonoBehaviour
     public float speed;
 
     GameObject resetOb;
+    public bool isBoss;
+
+    public GameObject menu;
+    public GameObject pause;
+    public GameObject win;
 
     int layerIndex;
 
@@ -124,8 +129,10 @@ public class EnemyController : MonoBehaviour
     {
         Debug.Log("b");
         c_Animator.SetLayerWeight(layerIndex, 0);
+        Debug.Log("g" + Time.time);
         canMove = false;
         yield return new WaitForSeconds(1.8f);
+        Debug.Log("y" + Time.time);
         Debug.Log("c");
         c_Animator.SetLayerWeight(layerIndex, 1);
         canMove = true;
@@ -159,6 +166,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        c_Animator.SetBool("IsBoss", isBoss);
         layerIndex = c_Animator.GetLayerIndex("Move");
         sturdyTime = 0;
         startPos = transform.position;
@@ -228,6 +236,7 @@ public class EnemyController : MonoBehaviour
             if(canMove && !hasDied)
             {
                 c_Animator.SetLayerWeight(layerIndex, 1);
+                Debug.Log("h" + Time.time);
                 FacePlayer();
             }
             else
@@ -310,6 +319,15 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForEndOfFrame();
         c_Animator.SetBool("Died", false);
         yield return new WaitForSeconds(1.25f);
+        if(isBoss)
+        {
+            menu.SetActive(true);
+            pause.SetActive(false);
+            win.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+            Destroy(gameObject);
+        }
         Destroy(gameObject);
         //gameObject.SetActive(false);
     }

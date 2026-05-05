@@ -20,8 +20,11 @@ public class Skelly : MonoBehaviour
 
     public Collider sw1;
 
+    
+
     private void Start()
     {
+        
         canSwing = true;
         navAgent = GetComponent<NavMeshAgent>();
     }
