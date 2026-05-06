@@ -78,12 +78,12 @@ public class EnemyController : MonoBehaviour
             sturdyTime = 0;
         }
         sturdy += sturDam;
-        if (sturDam >= maxSturdy / 3 && sturdy < maxSturdy)
+        if ((sturDam >= maxSturdy / 3 && sturdy < maxSturdy) && (health > 0))
         {
             c_Animator.SetTrigger("Stumble");
             StartCoroutine(_Stumble(dir));
         }
-        Debug.Log(damageTaken);
+       // Debug.Log(damageTaken);
        // Debug.Log(sturdyTime + " " + sturDam + " " + sturdy);
         
     }
@@ -108,10 +108,11 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator _Stumble(Vector3 dir)
     {
-        Debug.Log("a");
+        Debug.Log("a " + this);
         canMove = false;
         float a = 0;
         Vector3 moveDir = dir - transform.position;
+        GetComponent<Skelly>().PAnim();
         //Debug.Log(moveDir);
         while (a < 0.6f)
         {
@@ -121,19 +122,19 @@ public class EnemyController : MonoBehaviour
             a += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        //Debug.Log("t" + Time.time);
         canMove = true;
         yield return null;
     }
 
     IEnumerator _Fall()
     {
-        Debug.Log("b");
         c_Animator.SetLayerWeight(layerIndex, 0);
-        Debug.Log("g" + Time.time);
+        //Debug.Log("f " + Time.time + " " + (1.8f + Time.time));
         canMove = false;
+        GetComponent<Skelly>().PAnim();
         yield return new WaitForSeconds(1.8f);
-        Debug.Log("y" + Time.time);
-        Debug.Log("c");
+        //Debug.Log("y" + Time.time);
         c_Animator.SetLayerWeight(layerIndex, 1);
         canMove = true;
         //sturdy = maxSturdy;
@@ -208,9 +209,22 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    public bool check;
     // Update is called once per frame
+
+    string m_ClipName;
+    AnimatorClipInfo[] m_CurrentClipInfo;
     void Update()
     {
+        
+        // Debug.Log(this + " b " + m_CurrentClipInfo[0].clip.name);
+
+        if (check != canMove)
+        {
+          //  Debug.Log("test " + Time.time);
+            check = canMove;
+        }
+
         float dis = Vector3.Distance(targetObject.position, transform.position);
         if (dis <= 50f)
         {
@@ -236,7 +250,7 @@ public class EnemyController : MonoBehaviour
             if(canMove && !hasDied)
             {
                 c_Animator.SetLayerWeight(layerIndex, 1);
-                Debug.Log("h" + Time.time);
+                //Debug.Log("h" + Time.time);
                 FacePlayer();
             }
             else
@@ -313,13 +327,26 @@ public class EnemyController : MonoBehaviour
     {
         canMove = false;
         c_Animator.SetLayerWeight(layerIndex, 0);
+        
         hasDied = true;
         targetObject.GetComponent<PlayerController>().playerData.exp += xp;
+       // m_CurrentClipInfo = c_Animator.GetCurrentAnimatorClipInfo(0);
+       // Debug.Log(this + " a " + m_CurrentClipInfo[0].clip.name);
         c_Animator.SetBool("Died", true);
-        yield return new WaitForEndOfFrame();
+        //yield return new WaitForEndOfFrame();
+        
+        
+        yield return new WaitForSeconds(0.15f);
         c_Animator.SetBool("Died", false);
+        
+        m_CurrentClipInfo = c_Animator.GetCurrentAnimatorClipInfo(0);
+        if (m_CurrentClipInfo[0].clip.name != "SkellyDie")
+        {
+            Debug.Log(this + " b " + m_CurrentClipInfo[0].clip.name);
+        }
         yield return new WaitForSeconds(1.25f);
-        if(isBoss)
+        
+        if (isBoss)
         {
             menu.SetActive(true);
             pause.SetActive(false);

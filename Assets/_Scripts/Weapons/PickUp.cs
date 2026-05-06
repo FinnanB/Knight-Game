@@ -71,7 +71,7 @@ public class PickUp : MonoBehaviour
             {
                 Debug.Log("f ");
                 player.GetComponent<Sword>()._Tog[attackNum].gameObject.SetActive(true);
-                player.GetComponent<Sword>().SetData(2);
+                player.GetComponent<Sword>().SetData(this.gameObject);
                 Debug.Log("g ");
                 this.enabled = false;
             }

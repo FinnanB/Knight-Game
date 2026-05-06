@@ -814,6 +814,11 @@ MonoBehaviour:
   tDir: {x: 0, y: 0, z: 0}
   canMove: 1
   speed: 2
+  isBoss: 0
+  menu: {fileID: 0}
+  pause: {fileID: 0}
+  win: {fileID: 0}
+  check: 0
   a: 0
 --- !u!195 &809867643465284956
 NavMeshAgent:
@@ -824,7 +829,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1510678856435102870}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.5
   m_Speed: 8
   m_Acceleration: 50
   avoidancePriority: 50
@@ -901,8 +906,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 4.5, z: 3.5}
-  m_Center: {x: 0, y: 2.25, z: 3}
+  m_Size: {x: 1, y: 4.5, z: 3}
+  m_Center: {x: 0, y: 2.25, z: 2.5}
 --- !u!54 &6427387088725292486
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1156,7 +1161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95d43a3965682d24387b7714dfe2826b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 25
   _D: 0
   enemy: {fileID: 1510678856435102870}
   hits: 0

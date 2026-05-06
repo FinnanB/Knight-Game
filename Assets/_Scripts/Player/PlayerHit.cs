@@ -38,7 +38,14 @@ public class PlayerHit : MonoBehaviour
         {
           //  Debug.Log(other.gameObject);
             other.GetComponent<EnemyController>().Hit(trueDamage, _Player, damageType, _Player.GetComponent<PlayerController>().pierce, transform.position);
-            _Player.GetComponent<PlayerController>().mana +=10;
+            if (damageType)
+            {
+                _Player.GetComponent<PlayerController>().mana += 15;
+            }
+            else
+            {
+                _Player.GetComponent<PlayerController>().mana += 5;
+            }
             if(m_MyAudioSource != null)
             {  
                 m_MyAudioSource.Play(); 
@@ -46,7 +53,7 @@ public class PlayerHit : MonoBehaviour
         }
         else if (other.tag != "Enemy" && !damageType && hitWall) 
         {
-            Debug.Log(other.gameObject);
+            //Debug.Log(other.gameObject);
             //_Player.GetComponent<Animator>().SetTrigger("HitWrong");
         }
     }

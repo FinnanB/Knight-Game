@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using TMPro;
 using UnityEditor;
+using Unity.VisualScripting;
 
 public struct SwordStatus
 {
@@ -95,13 +96,15 @@ public class Sword : MonoBehaviour
         swordData.selected = new bool[2];
         for (int i = 0; i < swordData.unlocked.Length; i++)
         {
+            _Tog[i].isOn = false;
             swordData.unlocked[i] = false;
+            _Tog[i].gameObject.SetActive(false);
             swordData.selected[i] = false;
         }
         SaveData();
-        Debug.Log("b " + swordData.unlocked[0]);
+      //  Debug.Log("b " + swordData.unlocked[0]);
         LoadData();
-        Debug.Log("c " + swordData.unlocked[0]);
+       // Debug.Log("c " + swordData.unlocked[0]);
     }
 
     public void LoadData()
@@ -116,21 +119,26 @@ public class Sword : MonoBehaviour
             return;
             //ResetStatus();
         }
-        Debug.Log("d " + swordData.unlocked[0]);
+       // Debug.Log("d " + swordData.unlocked[0]);
         for (int i = 0; i < _Tog.Length; i++)
         {
-            Debug.Log("f " + i + " " + swordData.unlocked[0]);
+           // Debug.Log("f " + i + " " + swordData.unlocked[0]);
             _Tog[i].isOn = swordData.selected[i];
             _Tog[i].gameObject.SetActive(swordData.unlocked[i]);
-            Debug.Log("g " + i + " " + swordData.unlocked[0]);
+           // Debug.Log("g " + i + " " + swordData.unlocked[0]);
         }
-        Debug.Log("e " + swordData.unlocked[0]);
+       // Debug.Log("e " + swordData.unlocked[0]);
     }
 
-    public void SetData(int a)
+    public void SetData(GameObject a)
     {
-        //Debug.Log(a);
-       // Debug.Log("d " + swordData.unlocked[0]);
+       // Debug.Log("a = " + a);
+       // Debug.Log(a + " " + a.GetComponent<Toggle>().isOn);
+        //if (a.GetComponent<Toggle>() != null)
+        //{
+            
+        //}
+        // Debug.Log("d " + swordData.unlocked[0]);
         for (int i = 0; i < _Tog.Length; i++)
         {
             swordData.selected[i] = _Tog[i].isOn;
@@ -180,7 +188,7 @@ public class Sword : MonoBehaviour
             if ((swordData.selected[0] && !wMode) || (swordData.selected[1]&&wMode))
             {
                 GetComponent<PlayerController>().stamina -= swingCost;
-                GetComponent<PlayerController>().mana -= swingCost;
+                GetComponent<PlayerController>().mana -= swingCost*2;
                 c_Animator.SetTrigger("Heavy");
                 StartCoroutine(PlayAnimation());
             }

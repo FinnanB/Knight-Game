@@ -275,6 +275,7 @@ public class PlayerController : MonoBehaviour
             Move();
             if (Input.GetKeyDown(KeyCode.LeftControl) && mana > 0)
             {
+               // Debug.Log("h");
                 StopCoroutine(Shield());
                 StartCoroutine(Shield());
             }
@@ -431,6 +432,7 @@ public class PlayerController : MonoBehaviour
             }
             
             staminaRegening = true;
+        //    Debug.Log("d");
         }
         if (Input.GetKeyDown(KeyCode.Space) && stamina >= dodgeCost)
         {
@@ -448,10 +450,12 @@ public class PlayerController : MonoBehaviour
         stamina -= dodgeCost;
         staminaRegening = false;
         canMove = false;
+        canSprint = false;
         if (dir.magnitude == 0)
         {
             dir.z = 1f;
         }
+        //Debug.Log("a " + staminaRegening);
         c_Animator.SetFloat("Forward", dir.z);
         c_Animator.SetFloat("Sides", dir.x);
         c_Animator.SetTrigger("Roll");
@@ -469,9 +473,12 @@ public class PlayerController : MonoBehaviour
             a += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+       // Debug.Log("b " + staminaRegening);
         m_MyAudioSource.Stop();
         GetComponent<Sword>().swing = true;
         canMove = true;
+        speed = 6f;
+        canSprint = true;
         staminaRegening = true;
         yield return null;
     }
@@ -490,6 +497,7 @@ public class PlayerController : MonoBehaviour
             mana -= 30;
             yield return new WaitForSeconds(0.5f);
         }
+        canSprint = true;
         _block = 1;
     }
 
@@ -629,6 +637,7 @@ public class PlayerController : MonoBehaviour
 
     void Sprint()
     {
+       // Debug.Log("c");
         if(Input.GetKey(KeyCode.LeftShift) && stamina > 0)
         {
             

@@ -48,8 +48,14 @@ public class Skelly : MonoBehaviour
         {
             
             c_Animator.SetTrigger("Swing");
-            StartCoroutine(PlayAnimation());
+            PAnim();
         }
+    }
+
+    public void PAnim()
+    {
+        StopAllCoroutines();
+        StartCoroutine(PlayAnimation());
     }
 
     IEnumerator PlayAnimation()
@@ -59,10 +65,11 @@ public class Skelly : MonoBehaviour
         canSwing = false;
         GetComponent<EnemyController>().canMove = false;
         yield return new WaitUntil(() => c_Animator.GetCurrentAnimatorStateInfo(0).shortNameHash != cur);
-       // stateInfo = c_Animator.GetCurrentAnimatorStateInfo(0);
-       // GetComponent<NavMeshAgent>().speed = 0;
-       // sw1.enabled = true;
+        // stateInfo = c_Animator.GetCurrentAnimatorStateInfo(0);
+        // GetComponent<NavMeshAgent>().speed = 0;
+        // sw1.enabled = true;
         yield return new WaitForSeconds(stateInfo.length);
+        //Debug.Log("h " + Time.time);
         GetComponent<EnemyController>().canMove = true;
         // GetComponent<NavMeshAgent>().speed = 5;
         //sw1.enabled = false;
