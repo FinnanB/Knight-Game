@@ -84,7 +84,7 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(_Stumble(dir));
         }
        // Debug.Log(damageTaken);
-       // Debug.Log(sturdyTime + " " + sturDam + " " + sturdy);
+        Debug.Log(sturDam);
         
     }
 
