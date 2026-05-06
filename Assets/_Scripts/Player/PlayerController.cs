@@ -142,6 +142,7 @@ public class PlayerController : MonoBehaviour
         }
         
         filePath = Application.persistentDataPath;
+        Debug.Log(filePath);
         playerData = new PlayerStatus();
         // ResetData();
         

@@ -193,7 +193,14 @@ public class SceneController : MonoBehaviour
     public void LoadA(string scenename)
     {
         UnPause();
-        Cursor.lockState = CursorLockMode.None;
+        if(scenename == "Menu")
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
         SceneManager.LoadScene(scenename);
     }
 
