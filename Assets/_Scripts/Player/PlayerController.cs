@@ -15,6 +15,9 @@ public struct PlayerStatus
     public float maxMana;
     public float damage;*/
     public int[] lvls;
+    public List<float> deathTimes;
+    public float playTime;
+    public int deaths;
     public int maxHeals;
     public int level;
     public int exp;
@@ -80,6 +83,7 @@ public class PlayerController : MonoBehaviour
     public TMP_Text exp2;
     public TMP_Text _lvlCost;
     public TMP_Text totalLvl;
+    public TMP_Text statistics;
 
     public float stamRegen;
     public bool staminaRegening;
@@ -116,7 +120,10 @@ public class PlayerController : MonoBehaviour
 
     AudioSource m_MyAudioSource;
     public AudioClip[] audioClips;
+    
     public static PlayerController Instance { get; private set; }
+
+    
 
     void Awake()
     {
@@ -142,7 +149,6 @@ public class PlayerController : MonoBehaviour
         }
         
         filePath = Application.persistentDataPath;
-        Debug.Log(filePath);
         playerData = new PlayerStatus();
         // ResetData();
         
@@ -179,6 +185,9 @@ public class PlayerController : MonoBehaviour
     public void ResetData()
     {
         playerData.maxHeals = 3;
+        playerData.deaths = 0;
+        playerData.playTime = 0;
+        playerData.deathTimes = new List<float>();
         /*playerData.maxMana = 150;
         playerData.maxHealth = 200;
         playerData.maxStam = 200;
@@ -200,8 +209,15 @@ public class PlayerController : MonoBehaviour
     {
         //gameStatus.startPos = transform.position;
         //StatisticalData.statInstance.SetStatus(playerData.currentLevel);
+        
         string gameStatusJson = JsonUtility.ToJson(playerData);
         File.WriteAllText(filePath + "/" + FILE_NAME, gameStatusJson);
+    }
+
+    public void SetplayTime()
+    {
+        playerData.playTime += Time.time;
+        playerData.playTime = Mathf.Round(playerData.playTime);
     }
 
     public void Reset()
@@ -382,6 +398,21 @@ public class PlayerController : MonoBehaviour
         lvlsText2[2].text = maxMana.ToString();
         lvlsText2[3].text = strength.ToString();
         lvlsText2[4].text = dex.ToString();
+
+        int minutes = (int)playerData.playTime / 60;
+        int seconds = (int)playerData.playTime % 60;
+
+        string stat = new string("Lvl = " + playerData.level + "\nPlayTime = "  + string.Format("{0:00}:{1:00}", minutes, seconds));
+        string deaths = new string("");
+        for (int i = 0; i < playerData.deathTimes.Count; i++)
+        {
+            int dminutes = (int)playerData.deathTimes[i] / 60;
+            int dseconds = (int)playerData.deathTimes[i] % 60;
+            deaths = new string(deaths + "\nDeath " + (i + 1) + ": " + string.Format("{0:00}:{1:00}", dminutes, dseconds));
+        }
+        stat = new string(stat + deaths);
+        statistics.text = stat;
+
     }
 
     void _Health()
@@ -593,6 +624,9 @@ public class PlayerController : MonoBehaviour
         hitZone.enabled = false;
         c_Animator.SetBool("Died", true);
         playerData.exp = 0;
+        playerData.deaths++;
+        SetplayTime();
+        playerData.deathTimes.Add(playerData.playTime);
         SaveData();
         yield return new WaitForEndOfFrame();
         c_Animator.SetBool("Died", false);
