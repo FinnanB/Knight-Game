@@ -201,7 +201,7 @@ public class SceneController : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
-        SceneManager.LoadScene(scenename);
+        SceneManager.LoadScene(scenename, LoadSceneMode.Single);
     }
 
     public void Exit()

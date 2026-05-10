@@ -6,6 +6,7 @@ using Cinemachine;
 using System;
 using System.IO;
 using TMPro;
+using Unity.VisualScripting;
 
 public struct PlayerStatus
 {
@@ -15,7 +16,7 @@ public struct PlayerStatus
     public float maxMana;
     public float damage;*/
     public int[] lvls;
-    public List<float> deathTimes;
+    public List<string> deathTimes;
     public float playTime;
     public int deaths;
     public int maxHeals;
@@ -83,7 +84,7 @@ public class PlayerController : MonoBehaviour
     public TMP_Text exp2;
     public TMP_Text _lvlCost;
     public TMP_Text totalLvl;
-    public TMP_Text statistics;
+    public TMP_InputField statistics;
 
     public float stamRegen;
     public bool staminaRegening;
@@ -120,6 +121,8 @@ public class PlayerController : MonoBehaviour
 
     AudioSource m_MyAudioSource;
     public AudioClip[] audioClips;
+
+    public bool readTime;
     
     public static PlayerController Instance { get; private set; }
 
@@ -187,7 +190,7 @@ public class PlayerController : MonoBehaviour
         playerData.maxHeals = 3;
         playerData.deaths = 0;
         playerData.playTime = 0;
-        playerData.deathTimes = new List<float>();
+        playerData.deathTimes = new List<string>();
         /*playerData.maxMana = 150;
         playerData.maxHealth = 200;
         playerData.maxStam = 200;
@@ -216,8 +219,8 @@ public class PlayerController : MonoBehaviour
 
     public void SetplayTime()
     {
-        playerData.playTime += Time.time;
-        playerData.playTime = Mathf.Round(playerData.playTime);
+        //playerData.playTime += Time.deltaTime;
+        //playerData.playTime = Mathf.Round(playerData.playTime);
     }
 
     public void Reset()
@@ -281,6 +284,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(readTime)
+        {
+            playerData.playTime += Time.unscaledDeltaTime;
+        }
+      
+        //playerData.playTime = Mathf.Round(playerData.playTime);
         Sturdy();
         if (mana < 0)
         {
@@ -406,9 +415,9 @@ public class PlayerController : MonoBehaviour
         string deaths = new string("");
         for (int i = 0; i < playerData.deathTimes.Count; i++)
         {
-            int dminutes = (int)playerData.deathTimes[i] / 60;
-            int dseconds = (int)playerData.deathTimes[i] % 60;
-            deaths = new string(deaths + "\nDeath " + (i + 1) + ": " + string.Format("{0:00}:{1:00}", dminutes, dseconds));
+            //int dminutes = (int)playerData.deathTimes[i] / 60;
+            //int dseconds = (int)playerData.deathTimes[i] % 60;
+            deaths = new string(deaths + playerData.deathTimes[i]);
         }
         stat = new string(stat + deaths);
         statistics.text = stat;
@@ -625,8 +634,11 @@ public class PlayerController : MonoBehaviour
         c_Animator.SetBool("Died", true);
         playerData.exp = 0;
         playerData.deaths++;
-        SetplayTime();
-        playerData.deathTimes.Add(playerData.playTime);
+        //SetplayTime();
+        int dminutes = (int)playerData.playTime / 60;
+        int dseconds = (int)playerData.playTime % 60;
+        playerData.deathTimes.Add(new string("\nDeath " + playerData.deaths + ": Level: " + playerData.level + ": " + string.Format("{0:00}:{1:00}", dminutes, dseconds)));
+        //playerData.deathTimes.Add(playerData.playTime);
         SaveData();
         yield return new WaitForEndOfFrame();
         c_Animator.SetBool("Died", false);

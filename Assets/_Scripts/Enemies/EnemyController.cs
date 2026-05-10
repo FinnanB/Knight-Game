@@ -348,6 +348,7 @@ public class EnemyController : MonoBehaviour
         
         if (isBoss)
         {
+            targetObject.GetComponent<PlayerController>().readTime = false;
             menu.SetActive(true);
             pause.SetActive(false);
             win.SetActive(true);
