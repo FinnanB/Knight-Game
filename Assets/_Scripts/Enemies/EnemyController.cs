@@ -333,6 +333,7 @@ public class EnemyController : MonoBehaviour
        // m_CurrentClipInfo = c_Animator.GetCurrentAnimatorClipInfo(0);
        // Debug.Log(this + " a " + m_CurrentClipInfo[0].clip.name);
         c_Animator.SetBool("Died", true);
+        c_Animator.SetTrigger("Die");
         //yield return new WaitForEndOfFrame();
         
         
