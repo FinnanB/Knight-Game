@@ -12,11 +12,13 @@ public class Hint : MonoBehaviour
     public TMP_Text _InfoText;
 
     public string hint;
+    public GameObject sign;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+            sign.SetActive(true);
             _InfoText.enabled = true;
             _InfoText.text = hint;
         }
@@ -26,6 +28,7 @@ public class Hint : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            sign.SetActive(false);
             _InfoText.enabled = false;
             _InfoText.text = "";
         }
