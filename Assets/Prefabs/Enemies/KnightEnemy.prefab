@@ -1068,13 +1068,18 @@ MonoBehaviour:
   eyes: {fileID: 7563411303228068749}
   armor: 20
   seen: 0
-  xp: 20
+  xp: 30
   startPos: {x: 0, y: 0, z: 0}
   rotateSpeed: 3
   sturdyResetTime: 3
   tDir: {x: 0, y: 0, z: 0}
   canMove: 1
   speed: 5
+  isBoss: 0
+  menu: {fileID: 0}
+  pause: {fileID: 0}
+  win: {fileID: 0}
+  check: 0
   a: 0
 --- !u!114 &2261496266061188364
 MonoBehaviour:
@@ -1137,7 +1142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95d43a3965682d24387b7714dfe2826b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 100
   _D: 0
   enemy: {fileID: 443637304632334573}
   hits: 0

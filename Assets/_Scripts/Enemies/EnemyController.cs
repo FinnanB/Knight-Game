@@ -59,7 +59,7 @@ public class EnemyController : MonoBehaviour
         float damageTaken;
         if (damageType)
         {
-            damageTaken = Mathf.Max(1, dam-(armor*(10-pierce)/10));
+            damageTaken = Mathf.Max(1, dam-((armor / 2) * (20 - pierce) / 20));
             
         }
         else
@@ -78,12 +78,12 @@ public class EnemyController : MonoBehaviour
             sturdyTime = 0;
         }
         sturdy += sturDam;
-        if ((sturDam >= maxSturdy / 3 && sturdy < maxSturdy) && (health > 0))
+        if ((sturDam >= maxSturdy / 2 && sturdy < maxSturdy) && (health > 0))
         {
             c_Animator.SetTrigger("Stumble");
             StartCoroutine(_Stumble(dir));
         }
-       // Debug.Log(damageTaken);
+        Debug.Log(damageTaken);
         Debug.Log(sturDam);
         
     }

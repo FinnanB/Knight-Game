@@ -225,15 +225,15 @@ public class PlayerController : MonoBehaviour
 
     public void Reset()
     {
-        maxHealth = 180 + (20 * playerData.lvls[0]);
-        maxStam = 180 + (20 * playerData.lvls[1]);
-        maxMana = 135 + (15 * playerData.lvls[2]);
+        maxHealth = 180 + (60 * playerData.lvls[0]);
+        maxStam = 180 + (60 * playerData.lvls[1]);
+        maxMana = 135 + (45 * playerData.lvls[2]);
         health = maxHealth;
         stamina = maxStam;
         mana = maxMana;
-        strength = 18 + (7 * playerData.lvls[3]);
+        strength = 20 + (5 * playerData.lvls[3]);
         pierce = playerData.lvls[3];
-        dex = 15 + (6 * playerData.lvls[4]);
+        dex = 15 + (4 * playerData.lvls[4]);
         heals = playerData.maxHeals;
         transform.position = playerData.spawnPoint;
     }
@@ -393,7 +393,7 @@ public class PlayerController : MonoBehaviour
         }
         for (int i  = 0;  i < playerData.lvls.Length; i ++)
         {
-            if (playerData.lvls[i] == 10)
+            if (playerData.lvls[i] >= 5)
             {
                 buttons[i].enabled = false;
             }

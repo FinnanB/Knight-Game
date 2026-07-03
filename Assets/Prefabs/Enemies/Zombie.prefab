@@ -121,7 +121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1865769882405622639, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: xp
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1865769882405622639, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: eyes
@@ -129,7 +129,7 @@ PrefabInstance:
       objectReference: {fileID: 2373931528511320375}
     - target: {fileID: 1865769882405622639, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: armor
-      value: 10
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1865769882405622639, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: speed
@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1865769882405622639, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: maxSturdy
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1865769882405622639, guid: 31c0d4c88b09db346af10d5460713354, type: 3}
       propertyPath: c_Animator
