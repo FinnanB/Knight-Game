@@ -49,6 +49,8 @@ public class EnemyController : MonoBehaviour
     public GameObject pause;
     public GameObject win;
 
+    public bool horde;
+
     int layerIndex;
 
     public void Hit(float dam, GameObject other, bool damageType, float pierce, Vector3 dir)
@@ -177,6 +179,10 @@ public class EnemyController : MonoBehaviour
         sturdy = 0;
         destination = transform.position;
         targetObject = GameObject.FindGameObjectWithTag("Player").transform;
+        if(horde)
+        {
+            c_Animator.SetTrigger("Rise");
+        }
     }
 
     void canSee()
