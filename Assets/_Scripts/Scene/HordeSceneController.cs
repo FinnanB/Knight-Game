@@ -9,6 +9,8 @@ public class HordeSceneController : MonoBehaviour
     public bool inRange;
     public GameObject _text;
     public GameObject pause;
+    public GameObject menu;
+    public GameObject win;
     public GameObject fullPause;
     public GameObject mInput;
 
@@ -76,7 +78,7 @@ public class HordeSceneController : MonoBehaviour
         if (inRange)
         {
             fullPause.SetActive(true);
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             player.GetComponent<PlayerController>().SetPosition();
             player.GetComponent<Sword>().swing = false;
             player.GetComponent<PlayerController>().Reset();
@@ -97,13 +99,14 @@ public class HordeSceneController : MonoBehaviour
         // mInput.SetActive(true);
     }
 
-    void Reset()
+    public void Reset()
     {
-        if (player == null)
-        {
-            Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
-        }
+        //targetObject.GetComponent<PlayerController>().readTime = false;
+        menu.SetActive(false);
+        pause.SetActive(true);
+        win.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
     }
 
     public void LoadA(string scenename)
@@ -133,7 +136,7 @@ public class HordeSceneController : MonoBehaviour
             NewEnemies();
             spawnTime = Time.time + spawnRate;
         }
-        Reset();
+        //Reset();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Pause();

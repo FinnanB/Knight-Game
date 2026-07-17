@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_LocalPosition.y
@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.96
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f0a62337f962ce479dba6452cff5682, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1079,6 +1079,7 @@ MonoBehaviour:
   menu: {fileID: 0}
   pause: {fileID: 0}
   win: {fileID: 0}
+  horde: 0
   check: 0
   a: 0
 --- !u!114 &2261496266061188364

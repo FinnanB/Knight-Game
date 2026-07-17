@@ -116,11 +116,15 @@ public class PlayerController : MonoBehaviour
     public bool canSprint;
     int layerIndex;
 
+    public GameObject gameController;
+
     float sturdyTime;
     public float sturdyResetTime;
 
     AudioSource m_MyAudioSource;
     public AudioClip[] audioClips;
+
+    public bool hordeMode;
 
     public bool readTime;
     
@@ -643,7 +647,15 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForEndOfFrame();
         c_Animator.SetBool("Died", false);
         yield return new WaitForSeconds(1.25f);
-        Destroy(gameObject);
+        if(hordeMode)
+        {
+            gameController.GetComponent<HordeSceneController>().Reset();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
     }
 
     IEnumerator _Fall()
