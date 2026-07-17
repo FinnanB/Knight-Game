@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using System;
 using System.IO;
 
 public class HordeSceneController : MonoBehaviour
@@ -14,22 +13,19 @@ public class HordeSceneController : MonoBehaviour
     public GameObject mInput;
 
     public GameObject[] enemies;
-    public GameObject[] enemiesReset;
-
-    public GameObject[] doors;
-    GameObject arrows;
     public GameObject player;
 
     public bool reset;
+
+    public Transform[] spawnPos;
+
+    public float spawnTime;
+    public float spawnRate;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        filePath = Application.persistentDataPath;
-        sceneData = new SceneStatus();
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        doors = GameObject.FindGameObjectsWithTag("Door");
         NewEnemies();
         player = GameObject.FindWithTag("Player");
         /*if(reset)
@@ -39,20 +35,20 @@ public class HordeSceneController : MonoBehaviour
             player.GetComponent<Sword>().ResetData();
         }*/
         inRange = false;
-        //ResetData();
-        LoadData();
     }
 
 
 
     void NewEnemies()
     {
-        enemiesReset = new GameObject[enemies.Length];
-        for (int i = 0; i < enemies.Length; i++)
+        GameObject[] curEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if(curEnemies.Length <= 60)
         {
-            enemiesReset[i] = Instantiate(enemies[i], enemies[i].transform.position, enemies[i].transform.rotation, enemies[i].transform.parent);
-            enemiesReset[i].SetActive(false);
+            int spawn = Random.Range(0, enemies.Length);
+            int spawnP = Random.Range(0, spawnPos.Length);
+            Instantiate(enemies[spawn], spawnPos[spawnP].position, spawnPos[spawnP].rotation, spawnPos[spawnP]);
         }
+        
     }
 
     void OnTriggerEnter(Collider other)
@@ -81,24 +77,12 @@ public class HordeSceneController : MonoBehaviour
         {
             fullPause.SetActive(true);
             Time.timeScale = 0;
-            //enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            for (int i = 0; i < enemiesReset.Length; i++)
-            {
-                if (enemies[i] != null)
-                {
-                    Destroy(enemies[i]);
-                }
-                enemies[i] = enemiesReset[i];
-                enemies[i].SetActive(true);
-            }
-            NewEnemies();
             player.GetComponent<PlayerController>().SetPosition();
             player.GetComponent<Sword>().swing = false;
             player.GetComponent<PlayerController>().Reset();
         }
         // mInput.SetActive(false);
 
-        // player.GetComponent<Bow>().arrows = player.GetComponent<Bow>().maxArrows;
     }
 
 
@@ -144,6 +128,11 @@ public class HordeSceneController : MonoBehaviour
 
     void Update()
     {
+        if(Time.time > spawnTime)
+        {
+            NewEnemies();
+            spawnTime = Time.time + spawnRate;
+        }
         Reset();
         if (Input.GetKeyDown(KeyCode.Escape))
         {

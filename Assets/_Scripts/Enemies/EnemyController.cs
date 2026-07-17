@@ -250,7 +250,7 @@ public class EnemyController : MonoBehaviour
             seen = false;
             destination = transform.position;
         }
-        if(seen)
+        if(seen || horde)
         {
             destination = targetObject.position;
             if(canMove && !hasDied)
